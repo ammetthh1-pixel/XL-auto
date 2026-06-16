@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XLauto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="section-hero">
+        <nav class="navbar">
+            <a href="#">
+            <div class="navbar-logo">
+                <span class="xl">XL</span><span class="auto">auto</span>
+            </div>
+            </a>
+            <ul class="navbar-link">
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Nos véhicules</a></li>
+                <li><a href="#">Acheter</a></li>
+                <li><a href="#">Louer</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="icone">
+                <div class="ico">
+                    <img src="image/circle-user-regular.png" alt="Compte utilisateur" height="24" width="24">
+                </div>
+                <div class="coeur"><img src="image/empire-brands-solid.png" alt="Favoris" height="24" width="24"></div>
+                <a href="#" class="bouton"><img src="image/phone-solid.png" alt="Téléphone" width="20" height="20"> Nous contacter</a>
+            </div>
+        </nav>
+    <section class="hero">
+        <h1>Votre voiture,<br> <span class="choix"> vos choix.</span></h1>
+        <p>Location ou achat, trouvez le véhicule <br>qui vous correspond parmi notre large sélection</p>
+    <div class="achete-louer">
+        <button class="cle"><img src="image/key-solid.png" alt="cle" height="16px" width="16px"> Louer un véhicule</button>
+        <button class="achat"><img src="image/panier.png" alt="achat" height="16px" width="16px"> Acheter un véhicule</button>
+    </div>
+     </section>
+     <section class="recherche">
+        <div class="location">
+            <h4>Location courte durée</h4>
+            <h4 class="long">Location longue durée</h4>
+        </div>
+    <form action="/recherche" method="GET" class="horaire">
+        <div class="lieu">
+        <label for="lieu">Lieu de départ</label>
+        <div class="cladrien"><img src="image/location-dot-solid.png" alt="Lieu" height="20" width="20">
+        <input type="text" name="lieu" id="lieu" placeholder="Ville ou aéroport">
+        </div>
+        </div>
+        <div class="date">
+        <label for="date">Date de départ</label>
+        <div class="cladrien"><img src="image/calendar-regular (2).png" alt="Date" height="20" width="20">
+        <input type="text" name="date" id="date" placeholder="jj/mm/aaaa">
+        </div>
+        </div>
+        <div class="heure">
+            <label for="heure">Heure</label>
+            <div class="cladrien"><img src="image/clock-regular.png" alt="Heure" height="20" width="20">
+            <input type="text" name="heure" id="heure" placeholder="10:00">
+        </div>
+        </div>
+        <div class="btn">
+            <button type="submit" class="buton">Rechercher</button>
+        </div>
+    </form>
+    </section>
+    </header>
+    <section class="service">
+        <div class="infos">
+            <div class="info"><img src="image/shield-halved-solid.png" alt="Sécurité" height="30" width="30"></div>
+            <div class="descrip">
+            <h4>Véhicule récents</h4>
+            <p>Une flotte moderne et<br> régulièrement renouvelée.</p>
+            </div>
+        </div>
+            <div class="infos">
+                <div class="info"><img src="image/euro-sign-solid.png" alt="Tarifs" width="30" height="30"></div>
+
+                 <div class="descrip">
+                <h4>Meilleurs tarifs</h4>
+                <p>Des prix compétitifs toute <br>l'année.</p>
+                </div>
+            </div>
+             <div class="infos">
+                <div class="info"><img src="image/napster-brands-solid.png" alt="Service client" width="30" height="30"></div>
+
+                 <div class="descrip">
+                <h4>Service client 24/7</h4>
+                <p>Une équipe disponible à tout <br>moment pour vous aider.</p>
+                </div>
+            </div>
+             <div class="infos">
+                <div class="info"><img src="image/circle-check-regular.png" alt="Réservation simple" width="30" height="30"></div>
+
+                 <div class="descrip">
+                <h4>Réservation simple</h4>
+                <p>Réservez en quelques clics <br>en toute sécurité.</p>
+                </div>
+            </div>
+    </section>
+    <section class="container">
+        <div class="title">
+            <h2>Découvrez <span class="titre">nos véhicules</span></h2>
+            <p>Location ou achat, nous avons le véhicule qu'il vous faut.</p>
+        </div>
+        <div class="choix">
+            <button class="tous">Tous les véhicules</button>
+            <button class="voiture">Citadines</button>
+            <button class="voiture">SUV/4x4</button>
+            <button class="voiture">Utilitaires</button>
+            <button class="voiture">Luxe</button>
+        </div>
+        <div class="card">
+            <article class="article-card">
+            <img src="image/image_1.png" alt="Véhicule 1" width="300" height="200">
+            </article>
+             <article class="article-card">
+            <img src="image/image_2.png" alt="Véhicule 2" width="300" height="200">
+            </article>
+             <article class="article-card">
+            <img src="image/image_5.png" alt="Véhicule 3" width="300" height="200">
+            </article>
+             <article class="article-card">
+            <img src="image/image_4.png" alt="Véhicule 4" width="300" height="200">
+            </article>
+             <article class="article-card">
+            <img src="image/image_6.png" alt="Véhicule 5" width="300" height="200">
+            </article>
+             <article class="article-card">
+            <img src="image/image_7.png" alt="Véhicule 6" width="300" height="200">
+            </article>
+        </div>
+    </section>
+    <footer>
+        <p>&copy;2026 XLauto tous droits réservés.</p>
+    </footer>
+</body>
+</html>
