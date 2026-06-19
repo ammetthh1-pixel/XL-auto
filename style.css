@@ -22,17 +22,18 @@
     --code-border: #1f2535;
   }
 .section-hero{
-    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    min-height: 700px;
     background-image: linear-gradient(
         rgba(0,0,0,0.4),
         rgba(0,0,0,0.4)
     ), url("image/image_3.png");
 
     background-size: cover;
-    background-position: right center;
+    background-position: 75% bottom;
     background-repeat: no-repeat;
     width: 100%;
-    height: 700px;
 }
 .navbar{
     background: linear-gradient(
@@ -47,6 +48,7 @@
     padding-bottom: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
+    position: relative;
 
 }
 .navbar-link{
@@ -101,7 +103,7 @@ a{
 }
 .hero{
     color: var(--text);
-    padding: 100px 80px 40px;
+    padding: 90px 80px 40px;
 }
 .hero h1{
     font-size: 70px;
@@ -113,8 +115,9 @@ a{
     font-size: 18px;
     color: var(--text-mid)
 }
-.choix{
+.chois{
     color: var(--orange);
+
 }
 .achete-louer{
     display: flex;
@@ -150,14 +153,13 @@ a{
     filter: brightness(1.08);
 }
 .recherche{
-    border:1px solid white;
-    background-color:white;
+    border: 1px solid white;
+    background-color: white;
     border-radius: 10px;
-    margin-top: 0;
-    margin-left: 80px;
-    margin-right: 80px;
+    max-width: 1100px;
+    margin: 0 auto 40px;
     padding: 20px;
-    margin-bottom: 40px ;
+    width: calc(100% - 160px);
 }
 .container{
     margin-top: 120px;
@@ -177,18 +179,26 @@ a{
 }
 .horaire{
     display: flex;
+    align-items: end;
+    gap: 1rem;
     margin-left: 2rem;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
-.lieu, .date, .heure{
+.lieu{
+    display: flex;
+    flex: 1 1 420px;
+    flex-direction: column;
+}
+.date, .heure{
     display: flex;
     flex-direction: column;
 }
 .btn{
     display: flex;
     align-items: center;
-    margin-top: 0.9rem;
-    border-left: 1px solid var(--text);
+    margin-top: 0;
+    border-left: none;
 }
 
 label{
@@ -200,7 +210,8 @@ label{
  border-radius: 8px;
  padding: 1rem;
  text-align: left;
- width: 300px;
+ width: 100%;
+ min-width: 0;
  padding-left: 0.2rem;
 }
 .cladrien{
@@ -210,6 +221,7 @@ label{
  display: flex;
  justify-content: end;
  align-items: center;
+ max-width:500px;
 }
 #heure{
  border: 1px solid transparent;
@@ -224,10 +236,10 @@ label{
     color: var(--text);
     border-radius: 8px;
     padding: 1rem 2rem;
-    margin-left: 1rem;
     text-align: center;
     font-weight: bold;
     cursor: pointer;
+    white-space: nowrap;
 }
 .buton:hover{
     filter: brightness(1.05);
@@ -304,9 +316,10 @@ footer p{
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
     margin-top: 20px;
-    gap: 4rem;
 }
+
 .tous{
     border: 1px solid var(--bg);
     background-color: var(--bg);
@@ -329,14 +342,13 @@ footer p{
     filter: brightness(0.98);
 }
 .card{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     margin-top: 30px;
     gap: 2rem;
-    flex-wrap: wrap;
-    margin-left: 3rem;
+    margin-left: 2rem;
     padding-left: 0px;
+    margin-right: 2rem;
 }
 .article-card{
     border-radius: 8px;
@@ -353,4 +365,40 @@ footer{
     border-top: 1px solid var(--text);
     margin-top: 1rem;
 }
+.menu-toggle-input{
+    display:none;
+}
+.menu-toggle{
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    cursor: pointer;
+}
+.menu-toggle span{
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: #fff;
+}
+.nav-panel{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+@media (max-width: 768px){
+    .menu-toggle{
+        display: flex;
+    }
+    .nav-panel{
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 1rem;
+    }
 
+    
+}
+.menu-toggle-input:checked ~ .nav-panel{
+    display: flex;
+}
