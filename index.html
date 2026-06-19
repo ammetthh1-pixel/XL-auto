@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="page">
     <header class="section-hero">
         <nav class="navbar">
             <a href="#">
@@ -14,6 +15,15 @@
                 <span class="xl">XL</span><span class="auto">auto</span>
             </div>
             </a>
+
+            <input type="checkbox" name="menu-hamberguer" id="menu-toggle" class="menu-toggle-input">
+            <label for="menu-toggle" class="menu-toggle" aria-label="Ouvrir le menu">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+          <div class="nav-panel">
             <ul class="navbar-link">
                 <li><a href="#">Accueil</a></li>
                 <li><a href="#">Nos véhicules</a></li>
@@ -28,9 +38,10 @@
                 <div class="coeur"><img src="image/empire-brands-solid.png" alt="Favoris" height="24" width="24"></div>
                 <a href="#" class="bouton"><img src="image/phone-solid.png" alt="Téléphone" width="20" height="20"> Nous contacter</a>
             </div>
+          </div>
         </nav>
     <section class="hero">
-        <h1>Votre voiture,<br> <span class="choix"> vos choix.</span></h1>
+        <h1>Votre voiture,<br><span class="chois"> vos choix</span>.</h1>
         <p>Location ou achat, trouvez le véhicule <br>qui vous correspond parmi notre large sélection</p>
     <div class="achete-louer">
         <button class="cle"><img src="image/key-solid.png" alt="cle" height="16px" width="16px"> Louer un véhicule</button>
@@ -62,7 +73,7 @@
         </div>
         </div>
         <div class="btn">
-            <button type="submit" class="buton">Rechercher</button>
+            <button type="submit" class="buton">Suivant</button>
         </div>
     </form>
     </section>
@@ -136,5 +147,6 @@
     <footer>
         <p>&copy;2026 XLauto tous droits réservés.</p>
     </footer>
+    </div>
 </body>
 </html>
