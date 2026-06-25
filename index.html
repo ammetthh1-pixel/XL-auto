@@ -4,149 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XLauto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="page">
-    <header class="section-hero">
-        <nav class="navbar">
-            <a href="#">
-            <div class="navbar-logo">
-                <span class="xl">XL</span><span class="auto">auto</span>
-            </div>
-            </a>
-
-            <input type="checkbox" name="menu-hamberguer" id="menu-toggle" class="menu-toggle-input">
-            <label for="menu-toggle" class="menu-toggle" aria-label="Ouvrir le menu">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-          <div class="nav-panel">
-            <ul class="navbar-link">
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Nos véhicules</a></li>
-                <li><a href="#">Acheter</a></li>
-                <li><a href="#">Louer</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-            <div class="icone">
-                <div class="ico">
-                    <img src="image/circle-user-regular.png" alt="Compte utilisateur" height="24" width="24">
-                </div>
-                <div class="coeur"><img src="image/empire-brands-solid.png" alt="Favoris" height="24" width="24"></div>
-                <a href="#" class="bouton"><img src="image/phone-solid.png" alt="Téléphone" width="20" height="20"> Nous contacter</a>
-            </div>
-          </div>
-        </nav>
-    <section class="hero">
-        <h1>Votre voiture,<br><span class="chois"> vos choix</span>.</h1>
-        <p>Location ou achat, trouvez le véhicule <br>qui vous correspond parmi notre large sélection</p>
-    <div class="achete-louer">
-        <button class="cle"><img src="image/key-solid.png" alt="cle" height="16px" width="16px"> Louer un véhicule</button>
-        <button class="achat"><img src="image/panier.png" alt="achat" height="16px" width="16px"> Acheter un véhicule</button>
-    </div>
+    <section class="hero-section">
+    <!-- ══ HEADER ══ -->
+    <header class="header" data-node-id="n1" data-component="header">
+      <div class="menu-hamberguer">
+       <!-- Checkbox hack pour le menu mobile, sans JS -->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle-input">
+      <label for="menu-toggle" class="menu-toggle" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </label>
+      <div data-node-id="n2" class="logo" >XLauto</div>
+      </div>
+       <nav data-node-id="n3" class="nav" >
+        <a  data-node-id="n4" href="#" class="active">Accueil</a>
+        <a data-node-id="n5" href="#">Nos véhicules</a>
+        <a data-node-id="n6" href="#">Acheter</a>
+        <a data-node-id="n7" href="#">Louer</a>
+        <a data-node-id="n8" href="#">Contact</a>
+       </nav>
+       <div data-node-id="n9" class="header-actions">
+        <!-- Icône utilisateur -->
+         <button data-node-id="n10" class="icon-btn" aria-label="Profil utilisateur">
+          <svg data-node-id="n11" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path data-node-id="n12" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle data-node-id="n13" cx="12" cy="7" r="4"/>
+          </svg>
+        </button>
+       <!-- Icône paramètres -->
+        <button data-node-id="n14" class="icon-btn" aria-label="Paramètres">
+          <svg data-node-id="n15" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle data-node-id="n16" cx="12" cy="12" r="3"/>
+            <path data-node-id="n17" d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+          </svg>
+        </button>
+        <button data-node-id="n18" class="btn-contact">Nous contacter</button>
+      </div>
+    </header>
+    <!-- ══ HERO ══ -->
+     <section data-node-id="n19" class="hero">
+        <div data-node-id="n20" class="hero-overlay"></div>
+      <div data-node-id="n21" class="hero-content" data-component="hero-content">
+        <div data-node-id="n22" class="hero-tag">
+          <svg data-node-id="n23" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path data-node-id="n24" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Votre partenaire automobile
+        </div>
+        <h1 data-node-id="n25" class="hero-title">Votre voiture,<br><span data-node-id="n26">vos choix.</span></h1>
+        <p data-node-id="n27" class="hero-subtitle">Location ou achat, trouvez le véhicule qui vous correspond parmi notre large sélection de plus de 500 véhicules disponibles.</p>
+        <div data-node-id="n28" class="hero-cta">
+          <button data-node-id="n29" class="btn-primary">
+            <svg data-node-id="n30" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path data-node-id="n31" d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+            Louer un véhicule
+          </button>
+          <button data-node-id="n32" class="btn-secondary">
+            <svg data-node-id="n33" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle data-node-id="n34" cx="9" cy="21" r="1"/><circle data-node-id="n35" cx="20" cy="21" r="1"/><path data-node-id="n36" d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Acheter un véhicule
+          </button>
+        </div>
+      </div>
      </section>
-     <section class="recherche">
-        <div class="location">
-            <h4>Location courte durée</h4>
-            <h4 class="long">Location longue durée</h4>
+     <!-- ══ SEARCH WIDGET ══ -->
+    <div data-node-id="n37" class="search-widget" data-component="search-widget">
+      <div data-node-id="n38" class="search-tabs">
+        <button data-node-id="n39" class="tab-btn active"> location courte durée</button>
+        <button data-node-id="n40" class="tab-btn">location longue durée</button>
+      </div>
+      <form action="/recherche" method="GET" data-node-id="n42" class="search-fields">
+        <div data-node-id="n43" class="field-group">
+          <label for="lieu" data-node-id="n44">Lieu de départ</label>
+          <input id="lieu" data-node-id="n45" name="lieu" class="field-input" type="text" placeholder="Dakar, aéroport AIBD..."/>
         </div>
-    <form action="/recherche" method="GET" class="horaire">
-        <div class="lieu">
-        <label for="lieu">Lieu de départ</label>
-        <div class="cladrien"><img src="image/location-dot-solid.png" alt="Lieu" height="20" width="20">
-        <input type="text" name="lieu" id="lieu" placeholder="Ville ou aéroport">
+        <div data-node-id="n46" class="field-group">
+          <label for="date"  data-node-id="n47">Date de départ</label>
+          <input id="date" name="date" class="field-input" type="text" data-node-id="n48" />
         </div>
+        <div data-node-id="n49" class="field-group">
+          <label for="dates" data-node-id="n50">Date de retour</label>
+          <input  id="dates" name="dates"  class="field-input" type="text" data-node-id="n51"/>
         </div>
-        <div class="date">
-        <label for="date">Date de départ</label>
-        <div class="cladrien"><img src="image/calendar-regular (2).png" alt="Date" height="20" width="20">
-        <input type="text" name="date" id="date" placeholder="jj/mm/aaaa">
+        <div data-node-id="n52" class="field-group">
+          <label for="heure" data-node-id="n53">Heure</label>
+          <input id="heure" name="heure" data-node-id="n54" class="field-input" type="text" value="10:00"/>
         </div>
-        </div>
-        <div class="heure">
-            <label for="heure">Heure</label>
-            <div class="cladrien"><img src="image/clock-regular.png" alt="Heure" height="20" width="20">
-            <input type="text" name="heure" id="heure" placeholder="10:00">
-        </div>
-        </div>
-        <div class="btn">
-            <button type="submit" class="buton">Suivant</button>
+        <div data-node-id="n55" class="reach-btn">
+          <button data-node-id="n56" class="btn-search">
+            <svg data-node-id="n57" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle data-node-id="n58" cx="11" cy="11" r="8"/><path data-node-id="n59" d="m21 21-4.35-4.35"/></svg>
+            Rechercher
+          </button>
         </div>
     </form>
+   </div>
+   <!-- ══ FEATURES ══ -->
+    <section data-node-id="n111" class="features" data-component="features">
+      <div data-node-id="n112" class="features-grid">
+        <div data-node-id="n113" class="feature-card" data-component="feature-card">
+          <div data-node-id="n114" class="feature-icon">
+            <svg data-node-id="n115" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect data-node-id="n116" x="1" y="3" width="15" height="13" rx="1"/><path data-node-id="n117" d="M16 8h4a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-4"/><circle data-node-id="n118" cx="5.5" cy="18.5" r="2.5"/><circle data-node-id="n119" cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div data-node-id="n120">
+            <div data-node-id="n121" class="feature-title">Véhicules récents</div>
+            <div data-node-id="n122" class="feature-desc">Flotte renouvelée régulièrement avec les derniers modèles du marché pour votre confort.</div>
+          </div>
+        </div>
+        <div data-node-id="n123" class="feature-card" data-component="feature-card">
+          <div data-node-id="n124" class="feature-icon">
+            <svg data-node-id="n125" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path data-node-id="n126" d="M12 2L2 7l10 5 10-5-10-5z"/><path data-node-id="n127" d="M2 17l10 5 10-5"/><path data-node-id="n128" d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div data-node-id="n129">
+            <div data-node-id="n130" class="feature-title">Meilleurs tarifs</div>
+            <div data-node-id="n131" class="feature-desc">Des prix compétitifs garantis avec la transparence totale, sans frais cachés.</div>
+          </div>
+        </div>
+        <div data-node-id="n132" class="feature-card" data-component="feature-card">
+          <div data-node-id="n133" class="feature-icon">
+            <svg data-node-id="n134" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path data-node-id="n135" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div data-node-id="n136">
+            <div data-node-id="n137" class="feature-title">Service client 24/7</div>
+            <div data-node-id="n138" class="feature-desc">Notre équipe est disponible à toute heure pour vous accompagner avant, pendant et après.</div>
+          </div>
+        </div>
+        <div data-node-id="n139" class="feature-card" data-component="feature-card">
+          <div data-node-id="n140" class="feature-icon">
+            <svg data-node-id="n141" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path data-node-id="n142" d="M9 11l3 3L22 4"/><path data-node-id="n143" d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div data-node-id="n144">
+            <div data-node-id="n145" class="feature-title">Réservation simple</div>
+            <div data-node-id="n146" class="feature-desc">Processus de réservation en 3 étapes, confirmation immédiate par e-mail et SMS.</div>
+          </div>
+        </div>
+      </div>
     </section>
-    </header>
-    <section class="service">
-        <div class="infos">
-            <div class="info"><img src="image/shield-halved-solid.png" alt="Sécurité" height="30" width="30"></div>
-            <div class="descrip">
-            <h4>Véhicule récents</h4>
-            <p>Une flotte moderne et<br> régulièrement renouvelée.</p>
-            </div>
-        </div>
-            <div class="infos">
-                <div class="info"><img src="image/euro-sign-solid.png" alt="Tarifs" width="30" height="30"></div>
 
-                 <div class="descrip">
-                <h4>Meilleurs tarifs</h4>
-                <p>Des prix compétitifs toute <br>l'année.</p>
-                </div>
-            </div>
-             <div class="infos">
-                <div class="info"><img src="image/napster-brands-solid.png" alt="Service client" width="30" height="30"></div>
-
-                 <div class="descrip">
-                <h4>Service client 24/7</h4>
-                <p>Une équipe disponible à tout <br>moment pour vous aider.</p>
-                </div>
-            </div>
-             <div class="infos">
-                <div class="info"><img src="image/circle-check-regular.png" alt="Réservation simple" width="30" height="30"></div>
-
-                 <div class="descrip">
-                <h4>Réservation simple</h4>
-                <p>Réservez en quelques clics <br>en toute sécurité.</p>
-                </div>
-            </div>
-    </section>
-    <section class="container">
-        <div class="title">
-            <h2>Découvrez <span class="titre">nos véhicules</span></h2>
-            <p>Location ou achat, nous avons le véhicule qu'il vous faut.</p>
-        </div>
-        <div class="choix">
-            <button class="tous">Tous les véhicules</button>
-            <button class="voiture">Citadines</button>
-            <button class="voiture">SUV/4x4</button>
-            <button class="voiture">Utilitaires</button>
-            <button class="voiture">Luxe</button>
-        </div>
-        <div class="card">
-            <article class="article-card">
-            <img src="image/image_1.png" alt="Véhicule 1" width="300" height="200">
-            </article>
-             <article class="article-card">
-            <img src="image/image_2.png" alt="Véhicule 2" width="300" height="200">
-            </article>
-             <article class="article-card">
-            <img src="image/image_5.png" alt="Véhicule 3" width="300" height="200">
-            </article>
-             <article class="article-card">
-            <img src="image/image_4.png" alt="Véhicule 4" width="300" height="200">
-            </article>
-             <article class="article-card">
-            <img src="image/image_6.png" alt="Véhicule 5" width="300" height="200">
-            </article>
-             <article class="article-card">
-            <img src="image/image_7.png" alt="Véhicule 6" width="300" height="200">
-            </article>
-        </div>
-    </section>
-    <footer>
-        <p>&copy;2026 XLauto tous droits réservés.</p>
-    </footer>
-    </div>
 </body>
 </html>
