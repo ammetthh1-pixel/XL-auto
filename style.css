@@ -458,7 +458,8 @@
 
 /* ── VEHICLES ── */
 .vehicules{
-  padding: 72px 90px;
+  /* padding responsive: top/bottom and left/right clamp */
+  padding: clamp(24px, 4vw, 72px) clamp(16px, 6vw, 90px);
   background: var(--color-surface-2);
 }
 .section-header {
@@ -467,6 +468,15 @@
     align-items: flex-start;
     margin-bottom: 36px;
   }
+.section-label {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
 .section-title{
   font-family: var(--font-display);
   font-size: 32px;
@@ -506,22 +516,22 @@
 }
 .vehicles-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: clamp(16px, 2.5vw, 24px);
   }
 .vehicule-card{
   background: var(--color-white);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-card);
- transition: box-shadow .2s, transform .2s;
+  transition: box-shadow .2s, transform .2s;
 }
-.vehicle-card:hover {
+.vehicule-card:hover {
     box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     transform: translateY(-2px);
 }
 .card-body{
-  padding: 18px ;
+  padding: clamp(12px, 1.2vw, 18px);
 }
 .card-meta{
   font-size: 11px;
@@ -539,7 +549,8 @@
 }
 .card-specs {
     display: flex;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 8px 12px;
     margin-bottom: 16px;
 }
 .spec-tag {
@@ -558,6 +569,7 @@
     justify-content: space-between;
     padding-top: 14px;
     border-top: 1px solid var(--color-border);
+    gap: 12px;
 }
 .card-price {
     font-size: 22px;
@@ -581,13 +593,99 @@
     font-weight: 600;
     cursor: pointer;
     font-family: var(--font-body);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn-reserve:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(247, 148, 29, 0.2);
   }
   .vehicule-image{
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-    background: linear-gradient(135deg, #2c3e50, #3d5a6b);
-    position: relative;
-    overflow: hidden;
+      width: 100%;
+      height: clamp(160px, 18vw, 260px);
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #2c3e50, #3d5a6b);
+      position: relative;
+      overflow: hidden;
+    }
+@media (max-width: 700px){
+  .vehicules{
+    padding: clamp(16px, 4vw, 32px) 20px;
   }
+  /* Allow filter buttons to wrap instead of forcing a scroll bar */
+  .filter-buttons { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 20px; scrollbar-width: none; }
+    .filter-buttons::-webkit-scrollbar { display: none; }
+  .vehicles-grid{
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+}
+
+/* ── WHY US ── */
+.ref-img{
+  width: 100%;
+  max-width: 500px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+  display: block;
+}
+.why-us {
+    padding: clamp(40px, 6vw, 80px);
+    background: var(--color-ink);
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    gap: clamp(32px, 5vw, 80px);
+    align-items: center;
+  }
+  .why-content { max-width: 620px; }
+  .why-content .section-label { color: var(--color-primary); }
+  .why-content .section-title { color: #fff; }
+  .why-list {
+    list-style: none;
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .why-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+.why-check {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .why-item-text h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .why-item-text p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+  }
+@media (max-width: 700px){
+  .why-us{
+    display: flex;
+    flex-direction: column;
+    padding: clamp(28px, 5vw, 40px) 20px;
+  }
+  .ref-img{
+    width: 100%;
+    max-width: 360px;
+    height: 260px;
+  }
+}
+  
