@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>XLauto — Analyse & Plan d'amélioration | DevLearn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0D1117;--bg2:#161B22;--bg3:#21262D;--border:#30363D;
+  --accent:#58A6FF;--green:#3FB950;--yellow:#D29922;--purple:#BC8CFF;
+  --red:#F85149;--orange:#F0883E;--text:#E6EDF3;--muted:#8B949E;
+  --mono:'Fira Code',monospace;--sans:'Inter',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7}
+.doc{max-width:880px;margin:0 auto;padding:3rem 2rem 6rem}
+
+/* COVER */
+.cover{text-align:center;padding:3rem 0 2.5rem;border-bottom:1px solid var(--border);margin-bottom:3rem}
+.cover-label{font-family:var(--mono);font-size:.75rem;color:var(--orange);letter-spacing:.14em;text-transform:uppercase;margin-bottom:1rem}
+.cover h1{font-family:var(--mono);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;margin-bottom:.5rem}
+.cover h1 span{color:var(--orange)}
+.cover-sub{color:var(--muted);margin-bottom:2rem}
+.cover-badges{display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap}
+.badge{font-family:var(--mono);font-size:.72rem;padding:.28rem .75rem;border-radius:100px;background:var(--bg3);border:1px solid var(--border);color:var(--muted)}
+
+/* TOC */
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.5rem 2rem;margin-bottom:3rem}
+.toc-title{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.08em;margin-bottom:1rem}
+.toc ol{padding-left:1.2rem;display:flex;flex-direction:column;gap:.3rem}
+.toc li{font-size:.87rem}
+.toc a{color:var(--muted);text-decoration:none;transition:color .15s}
+.toc a:hover{color:var(--accent)}
+.toc .part{list-style:none;margin-left:-1.2rem;margin-top:.75rem;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase}
+.toc .part.ok{color:var(--green)}.toc .part.warn{color:var(--yellow)}.toc .part.bug{color:var(--red)}.toc .part.up{color:var(--accent)}
+
+/* HEADINGS */
+.part-title{font-family:var(--mono);font-size:clamp(1.2rem,3vw,1.7rem);font-weight:700;margin:3.5rem 0 .5rem;padding-bottom:.5rem;border-bottom:2px solid}
+.pt-green{color:var(--green);border-color:var(--green)}
+.pt-yellow{color:var(--yellow);border-color:var(--yellow)}
+.pt-red{color:var(--red);border-color:var(--red)}
+.pt-blue{color:var(--accent);border-color:var(--accent)}
+.pt-purple{color:var(--purple);border-color:var(--purple)}
+.part-intro{color:var(--muted);margin-bottom:2rem;font-size:.95rem}
+h2{font-family:var(--mono);font-size:1.05rem;font-weight:700;color:var(--text);margin:2.5rem 0 1rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+h3{font-family:var(--mono);font-size:.9rem;font-weight:600;color:var(--accent);margin:1.8rem 0 .75rem}
+
+/* PROSE */
+p{margin-bottom:1rem;font-size:.95rem}
+code{font-family:var(--mono);font-size:.82em;background:var(--bg3);color:var(--orange);padding:.15em .4em;border-radius:4px;border:1px solid var(--border)}
+strong{color:var(--text);font-weight:600}
+ul,ol{padding-left:1.3rem;margin-bottom:1rem}
+li{margin-bottom:.4rem;font-size:.92rem}
+
+/* BOXES */
+.box{border-radius:8px;padding:1rem 1.25rem;margin:1rem 0 1.5rem;border-left:4px solid}
+.box-green{background:rgba(63,185,80,.07);border-color:var(--green)}
+.box-yellow{background:rgba(210,153,34,.07);border-color:var(--yellow)}
+.box-red{background:rgba(248,81,73,.07);border-color:var(--red)}
+.box-blue{background:rgba(88,166,255,.07);border-color:var(--accent)}
+.box-purple{background:rgba(188,140,255,.07);border-color:var(--purple)}
+.box-title{font-family:var(--mono);font-size:.73rem;font-weight:700;letter-spacing:.08em;margin-bottom:.5rem}
+.box-green .box-title{color:var(--green)}
+.box-yellow .box-title{color:var(--yellow)}
+.box-red .box-title{color:var(--red)}
+.box-blue .box-title{color:var(--accent)}
+.box-purple .box-title{color:var(--purple)}
+.box p,.box li{font-size:.88rem;margin-bottom:.35rem}
+.box ul{padding-left:1.1rem}
+.box p:last-child{margin-bottom:0}
+
+/* CODE BLOCKS */
+.code-block{background:#010409;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:1rem 0 1.5rem}
+.code-header{background:var(--bg3);padding:.4rem 1rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid var(--border)}
+.code-dots{display:flex;gap:.35rem}
+.dot{width:10px;height:10px;border-radius:50%}
+.dr{background:#FF5F57}.dy{background:#FEBC2E}.dg{background:#28C840}
+.code-label{font-family:var(--mono);font-size:.68rem;color:var(--muted);letter-spacing:.06em}
+pre{padding:1.1rem 1.25rem;overflow-x:auto;font-family:var(--mono);font-size:.8rem;line-height:1.8;color:#D4D4D4}
+.kw{color:#C586C0}.sel{color:#D7BA7D}.prop{color:#9CDCFE}.val{color:#CE9178}
+.cm{color:#6A9955}.num{color:#B5CEA8}.punc{color:#FFD700}.fn{color:#DCDCAA}
+.bad{color:var(--red)}.good{color:var(--green)}
+
+/* SCORE CARD */
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.score-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center}
+.score-num{font-family:var(--mono);font-size:2rem;font-weight:700;margin-bottom:.2rem}
+.score-label{font-size:.78rem;color:var(--muted)}
+.s-green{color:var(--green)}.s-yellow{color:var(--yellow)}.s-red{color:var(--red)}.s-blue{color:var(--accent)}
+
+/* BEFORE/AFTER */
+.diff{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0 1.5rem}
+.diff-side{border-radius:8px;overflow:hidden}
+.diff-head{padding:.4rem .85rem;font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.06em}
+.diff-bad .diff-head{background:rgba(248,81,73,.15);color:var(--red)}
+.diff-good .diff-head{background:rgba(63,185,80,.15);color:var(--green)}
+.diff-body{background:#010409;padding:.85rem 1rem;font-family:var(--mono);font-size:.77rem;line-height:1.75;color:#D4D4D4;border:1px solid var(--border);border-top:none}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:.5rem;margin:1rem 0 1.5rem}
+.check-item{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 1rem;background:var(--bg2);border:1px solid var(--border);border-radius:8px}
+.check-icon{font-size:.9rem;flex-shrink:0;margin-top:.1rem}
+.check-body{flex:1}
+.check-title{font-weight:600;font-size:.88rem;margin-bottom:.2rem}
+.check-desc{font-size:.8rem;color:var(--muted)}
+
+/* PRIORITY BADGE */
+.prio{font-family:var(--mono);font-size:.65rem;padding:.15rem .5rem;border-radius:100px;margin-left:.5rem;vertical-align:middle}
+.prio-high{background:rgba(248,81,73,.15);color:var(--red)}
+.prio-med{background:rgba(210,153,34,.15);color:var(--yellow)}
+.prio-low{background:rgba(63,185,80,.15);color:var(--green)}
+
+.divider{border:none;border-top:1px solid var(--border);margin:3rem 0}
+.section-break{text-align:center;color:var(--border);font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;padding:2rem 0 1rem}
+
+@media(max-width:600px){
+  .diff{grid-template-columns:1fr}
+  .doc{padding:1.5rem 1rem 4rem}
+  .score-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-label">DevLearn · Projet XLauto</div>
+  <h1>Analyse <span>&</span> Plan d'amélioration</h1>
+  <p class="cover-sub">Retour complet sur index.html + style.css — Bugs, responsive, animations premium</p>
+  <div class="cover-badges">
+    <span class="badge">🔍 Analyse HTML/CSS</span>
+    <span class="badge">🐛 Bugs identifiés</span>
+    <span class="badge">📱 Responsive design</span>
+    <span class="badge">✨ Animations premium</span>
+    <span class="badge">🏗 Architecture 3 pages</span>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">// TABLE DES MATIÈRES</div>
+  <ol>
+    <li class="part ok">▸ Partie 1 — Ce qui est déjà bien fait</li>
+    <li class="part bug">▸ Partie 2 — Bugs à corriger</li>
+    <li><a href="#b1">2.1 HTML invalide</a></li>
+    <li><a href="#b2">2.2 Conflit de classes CSS</a></li>
+    <li><a href="#b3">2.3 Menu hamburger cassé</a></li>
+    <li><a href="#b4">2.4 Bottom nav toujours visible</a></li>
+    <li><a href="#b5">2.5 CSS mort et doublons</a></li>
+    <li><a href="#b6">2.6 Breakpoint mobile inutilisable</a></li>
+    <li class="part warn">▸ Partie 3 — Responsive design complet</li>
+    <li><a href="#r1">3.1 Stratégie mobile-first</a></li>
+    <li><a href="#r2">3.2 Header / navbar mobile</a></li>
+    <li><a href="#r3">3.3 Hero section mobile</a></li>
+    <li><a href="#r4">3.4 Search widget mobile</a></li>
+    <li><a href="#r5">3.5 Breakpoints recommandés</a></li>
+    <li class="part up">▸ Partie 4 — Animations & effets premium</li>
+    <li><a href="#a1">4.1 Menu hamburger → croix (CSS pur)</a></li>
+    <li><a href="#a2">4.2 Transitions hover enrichies</a></li>
+    <li><a href="#a3">4.3 Scroll-reveal avec Intersection Observer</a></li>
+    <li><a href="#a4">4.4 Header sticky avec blur</a></li>
+    <li><a href="#a5">4.5 Skeleton loading</a></li>
+    <li><a href="#a6">4.6 Micro-animations</a></li>
+    <li class="part purple">▸ Partie 5 — Architecture 3 pages</li>
+    <li><a href="#p1">5.1 Structure des pages</a></li>
+    <li><a href="#p2">5.2 Galerie véhicules</a></li>
+    <li><a href="#p3">5.3 Page À propos & Contact</a></li>
+    <li class="part up">▸ Partie 6 — Propriétés CSS avancées à découvrir</li>
+    <li><a href="#c1">6.1 backdrop-filter</a></li>
+    <li><a href="#c2">6.2 scroll-snap</a></li>
+    <li><a href="#c3">6.3 aspect-ratio</a></li>
+    <li><a href="#c4">6.4 clamp()</a></li>
+    <li><a href="#c5">6.5 :is() et :where()</a></li>
+    <li><a href="#c6">6.6 CSS custom properties dynamiques</a></li>
+    <li><a href="#c7">6.7 @starting-style</a></li>
+    <li class="part ok">▸ Partie 7 — Plan d'action priorisé</li>
+  </ol>
+</div>
+
+<!-- ═══════ PARTIE 1 — CE QUI EST BIEN -->
+<h1 class="part-title pt-green" id="part1">PARTIE 1 — Ce qui est déjà bien fait ✅</h1>
+<p class="part-intro">Avant tout, les points forts — et il y en a de vrais.</p>
+
+<div class="score-grid">
+  <div class="score-card"><div class="score-num s-green">✓</div><div class="score-label">CSS Custom Properties bien définies</div></div>
+  <div class="score-card"><div class="score-num s-green">✓</div><div class="score-label">SVG inline (pas d'images bitmap pour les icônes)</div></div>
+  <div class="score-card"><div class="score-num s-green">✓</div><div class="score-label">clamp() utilisé à plusieurs endroits</div></div>
+  <div class="score-card"><div class="score-num s-green">✓</div><div class="score-label">Animations fade-up sur hero et search widget</div></div>
+  <div class="score-card"><div class="score-num s-green">✓</div><div class="score-label">Bottom nav mobile avec position fixed</div></div>
+  <div class="score-card"><div class="score-num s-green">✓</div><div class="score-label">backdrop-filter sur btn-secondary</div></div>
+  <div class="score-card"><div class="score-num s-green">✓</div><div class="score-label">aria-label sur les boutons icône</div></div>
+  <div class="score-card"><div class="score-num s-green">✓</div><div class="score-label">Scroll-behavior smooth</div></div>
+  <div class="score-card"><div class="score-num s-green">✓</div><div class="score-label">Variables de spacing et radius cohérentes</div></div>
+  <div class="score-card"><div class="score-num s-green">✓</div><div class="score-label">Deux polices bien choisies (Playfair + Inter)</div></div>
+</div>
+
+<div class="box box-blue">
+  <p class="box-title">💬 SYNTHÈSE</p>
+  <p>La base est <strong>solide</strong>. La structure sémantique HTML5 est respectée (header, main, section, footer), les variables CSS sont bien pensées, et tu as déjà des éléments premium comme le hero overlay, le tag badge, et les transitions sur les boutons. C'est vraiment un bon niveau pour quelqu'un qui apprend seul.</p>
+</div>
+
+<div class="section-break">── ✦ ──</div>
+
+<!-- ═══════ PARTIE 2 — BUGS -->
+<h1 class="part-title pt-red" id="part2">PARTIE 2 — Bugs à corriger 🐛</h1>
+
+<h2 id="b1">2.1 — HTML invalide <span class="prio prio-high">HAUTE PRIORITÉ</span></h2>
+
+<div class="diff">
+  <div class="diff-side diff-bad">
+    <div class="diff-head">❌ Ligne 2 — HTML invalide</div>
+    <div class="diff-body"><span class="bad">&lt;HTml lang="fr"&gt;</span>
+<span class="cm">/* Majuscules mélangées */</span></div>
+  </div>
+  <div class="diff-side diff-good">
+    <div class="diff-head">✅ Correction</div>
+    <div class="diff-body"><span class="good">&lt;html lang="fr"&gt;</span>
+<span class="cm">/* Toujours en minuscules */</span></div>
+  </div>
+</div>
+
+<div class="box box-red">
+  <p class="box-title">⚠️ IMPACT</p>
+  <p>Le navigateur corrige automatiquement, mais un validateur HTML rejettera la page et certains parseurs XML (comme ceux des scrapers SEO) plante sur cette balise.</p>
+</div>
+
+<h2 id="b2">2.2 — Conflit de classes CSS <span class="prio prio-high">HAUTE PRIORITÉ</span></h2>
+<p>Dans le HTML de la version précédente, <code>.choix</code> était utilisé à la fois pour le <code>&lt;span&gt;</code> orange dans le H1 et pour le conteneur de boutons de filtre. Dans cette version, regarde bien tes classes et assure-toi qu'aucun nom n'est réutilisé avec deux rôles différents.</p>
+
+<h2 id="b3">2.3 — Menu hamburger cassé <span class="prio prio-high">HAUTE PRIORITÉ</span></h2>
+<p>Le menu hamburger existe dans le HTML et le CSS prévoit les <code>span</code>, mais <strong>il ne se ferme jamais sur mobile</strong> car les règles CSS qui activent le menu au clic du checkbox sont absentes.</p>
+
+<div class="diff">
+  <div class="diff-side diff-bad">
+    <div class="diff-head">❌ Ce qui manque dans style.css</div>
+    <div class="diff-body"><span class="cm">/* Ces règles n'existent pas : */</span>
+<span class="bad">.menu-toggle-input:checked ~ .nav { ... }
+.menu-toggle-input:checked + .menu-toggle span {...}</span></div>
+  </div>
+  <div class="diff-side diff-good">
+    <div class="diff-head">✅ Ce qu'il faut ajouter</div>
+    <div class="diff-body"><span class="cm">/* Ouvrir le nav au clic */</span>
+<span class="good">.menu-toggle-input:checked ~ .nav {
+  display: flex;
+  flex-direction: column;
+}
+</span><span class="cm">/* Transformer hamburger en ✕ */</span>
+<span class="good">.menu-toggle-input:checked
+  + .menu-toggle span:nth-child(1){
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle-input:checked
+  + .menu-toggle span:nth-child(2){
+  opacity: 0;
+  transform: scaleX(0);
+}
+.menu-toggle-input:checked
+  + .menu-toggle span:nth-child(3){
+  transform: translateY(-7px) rotate(-45deg);
+}</span></div>
+  </div>
+</div>
+
+<div class="box box-blue">
+  <p class="box-title">💡 COMMENT ÇA MARCHE</p>
+  <p>Le sélecteur <code>~</code> s'appelle le <strong>combinateur frère général</strong>. Il cible un élément qui suit un autre dans le même parent. Quand la checkbox est cochée (<code>:checked</code>), on sélectionne le <code>.nav</code> qui la suit et on le rend visible. C'est la technique CSS pure sans JS.</p>
+  <p>La structure HTML doit impérativement être : <code>input[checkbox]</code> → <code>label</code> → <code>nav</code> dans cet ordre dans le même parent.</p>
+</div>
+
+<h2 id="b4">2.4 — Bottom nav visible sur desktop <span class="prio prio-high">HAUTE PRIORITÉ</span></h2>
+<p>La <code>.bottom-nav</code> est en <code>position: fixed</code> et s'affiche sur <strong>tous les écrans</strong>, y compris desktop. C'est une nav mobile uniquement.</p>
+
+<div class="diff">
+  <div class="diff-side diff-bad">
+    <div class="diff-head">❌ Actuel — visible partout</div>
+    <div class="diff-body"><span class="sel">.bottom-nav</span> {
+  <span class="prop">position</span>: <span class="val">fixed</span>;
+  <span class="prop">bottom</span>: <span class="num">0</span>;
+  <span class="cm">/* aucun media query */</span>
+}</div>
+  </div>
+  <div class="diff-side diff-good">
+    <div class="diff-head">✅ Correction</div>
+    <div class="diff-body"><span class="good">.bottom-nav { display: none; }</span>
+
+<span class="kw">@media</span> (max-width: <span class="num">768px</span>) {
+  <span class="sel">.bottom-nav</span> {
+    <span class="prop">display</span>: <span class="val">flex</span>;
+    <span class="prop">position</span>: <span class="val">fixed</span>;
+    <span class="prop">bottom</span>: <span class="num">0</span>;
+    <span class="cm">/* etc. */</span>
+  }
+}</div>
+  </div>
+</div>
+
+<h2 id="b5">2.5 — CSS mort et doublons <span class="prio prio-med">PRIORITÉ MOYENNE</span></h2>
+<ul>
+  <li><code>.search-widget</code> a <code>margin-bottom: 24px</code> défini <strong>deux fois</strong> (lignes 218 et 219 du CSS).</li>
+  <li><code>html { scroll-behavior: smooth }</code> est déclaré <strong>au milieu</strong> du CSS (ligne 314) au lieu d'être avec le reset en haut.</li>
+  <li><code>.hero-content</code> est défini <strong>deux fois</strong> : une fois pour le layout (padding, max-width) et une fois pour l'animation. Fusionne-les en un seul bloc.</li>
+  <li><code>padding-left: clamp</code> sans valeurs (ligne 994 du CSS) → propriété invalide, le parser l'ignore mais c'est une erreur.</li>
+  <li>La variable <code>--border</code> est utilisée dans <code>.bottom-nav</code> (<code>border-top: 1px solid var(--border)</code>) mais <code>--border</code> n'est pas définie dans ton <code>:root</code> — elle n'existe que dans l'ancien fichier CSS. Résultat : la bordure est invisible.</li>
+</ul>
+
+<h2 id="b6">2.6 — Breakpoint inutilisable <span class="prio prio-med">PRIORITÉ MOYENNE</span></h2>
+
+<div class="diff">
+  <div class="diff-side diff-bad">
+    <div class="diff-head">❌ Breakpoint impossible</div>
+    <div class="diff-body"><span class="kw">@media</span> screen and (max-width: <span class="bad">168px</span>){
+  <span class="cm">/* Aucun écran n'a 168px */</span>
+  <span class="cm">/* Cette règle ne s'applique jamais */</span>
+}</div>
+  </div>
+  <div class="diff-side diff-good">
+    <div class="diff-head">✅ Correction probable voulue</div>
+    <div class="diff-body"><span class="kw">@media</span> screen and (max-width: <span class="good">480px</span>){
+  <span class="cm">/* Petits mobiles */</span>
+}
+<span class="cm">/* ou */</span>
+<span class="kw">@media</span> screen and (max-width: <span class="good">768px</span>){
+  <span class="cm">/* Tous les mobiles */</span>
+}</div>
+  </div>
+</div>
+
+<div class="section-break">── ✦ ──</div>
+
+<!-- ═══════ PARTIE 3 — RESPONSIVE -->
+<h1 class="part-title pt-yellow" id="part3">PARTIE 3 — Responsive Design complet 📱</h1>
+<p class="part-intro">Plan complet pour adapter XLauto à mobile (375px), mobile large (480px), tablette (768px) et desktop (1024px+).</p>
+
+<h2 id="r1">3.1 — Stratégie mobile-first</h2>
+<p>Ton CSS actuel est <strong>desktop-first</strong> : tu écris pour grand écran puis tu écrases avec des media queries. La stratégie <strong>mobile-first</strong> fait l'inverse — tu pars du petit écran et tu ajoutes pour les grands. C'est plus propre et plus performant.</p>
+
+<div class="box box-blue">
+  <p class="box-title">📌 LES 3 BREAKPOINTS DE XLAUTO</p>
+  <ul>
+    <li><code>@media (max-width: 480px)</code> → mobile petit (Galaxy S8, iPhone SE)</li>
+    <li><code>@media (max-width: 768px)</code> → mobile standard + tablette portrait</li>
+    <li><code>@media (max-width: 1024px)</code> → tablette landscape + petit laptop</li>
+  </ul>
+</div>
+
+<h2 id="r2">3.2 — Header / Navbar mobile</h2>
+
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS — Navbar responsive complète</span></div>
+  <pre><span class="cm">/* ── DESKTOP (base) ── */</span>
+<span class="sel">.header</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">padding</span>: <span class="num">0 80px</span>;
+  <span class="prop">height</span>: <span class="num">72px</span>;
+  <span class="prop">gap</span>: <span class="num">48px</span>;
+  <span class="prop">position</span>: <span class="val">fixed</span>;     <span class="cm">/* ← rendre sticky (voir 4.4) */</span>
+  <span class="prop">top</span>: <span class="num">0</span>; <span class="prop">left</span>: <span class="num">0</span>; <span class="prop">right</span>: <span class="num">0</span>;
+  <span class="prop">z-index</span>: <span class="num">100</span>;
+}
+<span class="sel">.menu-toggle</span> { <span class="prop">display</span>: <span class="val">none</span>; }  <span class="cm">/* hamburger caché sur desktop */</span>
+<span class="sel">.bottom-nav</span>   { <span class="prop">display</span>: <span class="val">none</span>; }  <span class="cm">/* bottom nav cachée sur desktop */</span>
+
+<span class="cm">/* ── TABLETTE (≤ 1024px) ── */</span>
+<span class="kw">@media</span> (max-width: <span class="num">1024px</span>) {
+  <span class="sel">.header</span> { <span class="prop">padding</span>: <span class="num">0 32px</span>; <span class="prop">gap</span>: <span class="num">24px</span>; }
+  <span class="sel">.header-actions</span> { <span class="prop">display</span>: <span class="val">none</span>; } <span class="cm">/* icônes masquées */</span>
+}
+
+<span class="cm">/* ── MOBILE (≤ 768px) ── */</span>
+<span class="kw">@media</span> (max-width: <span class="num">768px</span>) {
+  <span class="sel">.header</span> {
+    <span class="prop">padding</span>: <span class="num">0 20px</span>;
+    <span class="prop">justify-content</span>: <span class="val">space-between</span>;
+    <span class="prop">height</span>: <span class="num">60px</span>;
+  }
+  <span class="sel">.menu-toggle</span> { <span class="prop">display</span>: <span class="val">flex</span>; } <span class="cm">/* hamburger visible */</span>
+  <span class="sel">.nav</span> {
+    <span class="prop">display</span>: <span class="val">none</span>;           <span class="cm">/* caché par défaut sur mobile */</span>
+    <span class="prop">position</span>: <span class="val">fixed</span>;
+    <span class="prop">inset</span>: <span class="num">60px 0 0 0</span>;      <span class="cm">/* inset = top right bottom left */</span>
+    <span class="prop">background</span>: <span class="val">rgba(0,0,0,0.95)</span>;
+    <span class="prop">flex-direction</span>: <span class="val">column</span>;
+    <span class="prop">align-items</span>: <span class="val">center</span>;
+    <span class="prop">justify-content</span>: <span class="val">center</span>;
+    <span class="prop">gap</span>: <span class="num">32px</span>;
+    <span class="prop">backdrop-filter</span>: <span class="val">blur(12px)</span>;
+    <span class="prop">z-index</span>: <span class="num">99</span>;
+  }
+  <span class="sel">.nav a</span> { <span class="prop">font-size</span>: <span class="num">20px</span>; }
+  <span class="cm">/* Ouvrir le menu quand la checkbox est cochée */</span>
+  <span class="sel">.menu-toggle-input:checked ~ .nav</span> {
+    <span class="prop">display</span>: <span class="val">flex</span>;
+  }
+  <span class="cm">/* Transformer le hamburger en ✕ */</span>
+  <span class="sel">.menu-toggle-input:checked + .menu-toggle span:nth-child(1)</span> {
+    <span class="prop">transform</span>: <span class="val">translateY(7px) rotate(45deg)</span>;
+  }
+  <span class="sel">.menu-toggle-input:checked + .menu-toggle span:nth-child(2)</span> {
+    <span class="prop">opacity</span>: <span class="num">0</span>;
+    <span class="prop">transform</span>: <span class="val">scaleX(0)</span>;
+  }
+  <span class="sel">.menu-toggle-input:checked + .menu-toggle span:nth-child(3)</span> {
+    <span class="prop">transform</span>: <span class="val">translateY(-7px) rotate(-45deg)</span>;
+  }
+  <span class="sel">.bottom-nav</span> { <span class="prop">display</span>: <span class="val">flex</span>; } <span class="cm">/* apparaît sur mobile */</span>
+  <span class="sel">.footer</span> { <span class="prop">margin-bottom</span>: <span class="num">64px</span>; } <span class="cm">/* espace pour la bottom-nav */</span>
+}</pre>
+</div>
+
+<div class="box box-yellow">
+  <p class="box-title">⚠️ ORDRE DANS LE HTML OBLIGATOIRE</p>
+  <p>Pour que le sélecteur <code>input:checked ~ .nav</code> fonctionne, l'ordre dans le HTML doit être :</p>
+  <ol style="margin-top:.5rem;padding-left:1.2rem">
+    <li><code>&lt;input type="checkbox" id="menu-toggle"&gt;</code></li>
+    <li><code>&lt;label for="menu-toggle" class="menu-toggle"&gt;</code></li>
+    <li><code>&lt;nav class="nav"&gt;</code></li>
+  </ol>
+  <p style="margin-top:.5rem">Le <code>~</code> (frère général) exige qu'ils soient au même niveau dans le HTML. Vérifie ton HTML — actuellement le <code>label</code> et le <code>input</code> sont dans <code>.menu-hamberguer</code>, et le <code>nav</code> est à l'extérieur. Il faut les mettre tous au même niveau dans <code>.header</code>.</p>
+</div>
+
+<h2 id="r3">3.3 — Hero section mobile</h2>
+
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS</span></div>
+  <pre><span class="kw">@media</span> (max-width: <span class="num">768px</span>) {
+  <span class="sel">.hero-section</span> {
+    <span class="prop">min-height</span>: <span class="num">100dvh</span>;  <span class="cm">/* dvh = dynamic viewport height (iOS fix) */</span>
+    <span class="prop">background-position</span>: <span class="val">center center</span>;
+  }
+  <span class="sel">.hero</span> { <span class="prop">height</span>: <span class="val">auto</span>; <span class="prop">min-height</span>: <span class="num">500px</span>; <span class="prop">padding-top</span>: <span class="num">80px</span>; }
+  <span class="sel">.hero-content</span> {
+    <span class="prop">padding</span>: <span class="num">0 20px</span>;
+    <span class="prop">max-width</span>: <span class="num">100%</span>;
+  }
+  <span class="sel">.hero-title</span> {
+    <span class="prop">font-size</span>: <span class="val">clamp(32px, 8vw, 48px)</span>; <span class="cm">/* s'adapte automatiquement */</span>
+  }
+  <span class="sel">.hero-subtitle</span> { <span class="prop">font-size</span>: <span class="num">14px</span>; }
+  <span class="sel">.hero-cta</span> {
+    <span class="prop">flex-direction</span>: <span class="val">column</span>;  <span class="cm">/* boutons empilés */</span>
+    <span class="prop">gap</span>: <span class="num">12px</span>;
+  }
+  <span class="sel">.btn-primary</span>,
+  <span class="sel">.btn-secondary</span> {
+    <span class="prop">width</span>: <span class="num">100%</span>;
+    <span class="prop">justify-content</span>: <span class="val">center</span>;
+  }
+}</pre>
+</div>
+
+<h2 id="r4">3.4 — Search widget mobile</h2>
+
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS</span></div>
+  <pre><span class="kw">@media</span> (max-width: <span class="num">768px</span>) {
+  <span class="sel">.search-widget</span> {
+    <span class="prop">margin</span>: <span class="num">0 16px 16px</span>;     <span class="cm">/* moins de marge latérale */</span>
+    <span class="prop">padding</span>: <span class="num">20px 16px</span>;
+    <span class="prop">border-radius</span>: <span class="num">12px</span>;
+  }
+  <span class="sel">.search-fields</span> {
+    <span class="prop">grid-template-columns</span>: <span class="num">1fr 1fr</span>; <span class="cm">/* 2 colonnes */</span>
+  }
+  <span class="cm">/* Champ lieu prend toute la largeur */</span>
+  <span class="sel">.search-fields .field-group:first-child</span> {
+    <span class="prop">grid-column</span>: <span class="val">1 / -1</span>;
+  }
+  <span class="cm">/* Bouton recherche prend toute la largeur */</span>
+  <span class="sel">.reach-btn</span> {
+    <span class="prop">grid-column</span>: <span class="val">1 / -1</span>;
+  }
+}
+
+<span class="kw">@media</span> (max-width: <span class="num">480px</span>) {
+  <span class="sel">.search-fields</span> {
+    <span class="prop">grid-template-columns</span>: <span class="num">1fr</span>; <span class="cm">/* tout en colonne sur petit mobile */</span>
+  }
+}</pre>
+</div>
+
+<h2 id="r5">3.5 — Récapitulatif des breakpoints</h2>
+
+<div class="box box-blue">
+  <p class="box-title">📐 ORDRE RECOMMANDÉ DANS TON CSS</p>
+  <ul>
+    <li>Styles base (desktop) en premier</li>
+    <li><code>@media (max-width: 1024px)</code> — tablette landscape</li>
+    <li><code>@media (max-width: 768px)</code> — mobile et tablette portrait</li>
+    <li><code>@media (max-width: 480px)</code> — petits mobiles</li>
+    <li><code>@media (max-width: 360px)</code> — ultra-petits (Galaxy S5, etc.)</li>
+  </ul>
+  <p style="margin-top:.5rem">Regroupes toutes les media queries <strong>à la fin du fichier CSS</strong>, par composant ou par breakpoint. Évite de les disperser partout comme c'est le cas actuellement.</p>
+</div>
+
+<div class="section-break">── ✦ ──</div>
+
+<!-- ═══════ PARTIE 4 — ANIMATIONS -->
+<h1 class="part-title pt-blue" id="part4">PARTIE 4 — Animations & Effets Premium ✨</h1>
+
+<h2 id="a1">4.1 — Menu hamburger → croix animée (CSS pur)</h2>
+<p>Tu as déjà les <code>transition</code> sur les <code>span</code> du hamburger, mais les règles d'activation manquent. Voici la version complète avec animation fluide :</p>
+
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS — Hamburger → ✕ complet</span></div>
+  <pre><span class="sel">.menu-toggle span</span> {
+  <span class="prop">display</span>: <span class="val">block</span>;
+  <span class="prop">height</span>: <span class="num">2px</span>;
+  <span class="prop">width</span>: <span class="num">100%</span>;
+  <span class="prop">background</span>: <span class="val">white</span>;
+  <span class="prop">border-radius</span>: <span class="num">2px</span>;
+  <span class="prop">transition</span>: 
+    <span class="val">transform 0.3s cubic-bezier(0.23, 1, 0.32, 1)</span>,
+    <span class="val">opacity 0.2s ease</span>,
+    <span class="val">width 0.3s ease</span>;  <span class="cm">/* optionnel : shrink avant rotate */</span>
+  <span class="prop">transform-origin</span>: <span class="val">center</span>;  <span class="cm">/* pivot au centre de chaque barre */</span>
+}
+
+<span class="cm">/* État OUVERT — hamburger devient ✕ */</span>
+<span class="sel">.menu-toggle-input:checked + .menu-toggle span:nth-child(1)</span> {
+  <span class="prop">transform</span>: <span class="val">translateY(7px) rotate(45deg)</span>;
+}
+<span class="sel">.menu-toggle-input:checked + .menu-toggle span:nth-child(2)</span> {
+  <span class="prop">opacity</span>: <span class="num">0</span>;
+  <span class="prop">transform</span>: <span class="val">scaleX(0)</span>;
+}
+<span class="sel">.menu-toggle-input:checked + .menu-toggle span:nth-child(3)</span> {
+  <span class="prop">transform</span>: <span class="val">translateY(-7px) rotate(-45deg)</span>;
+}</pre>
+</div>
+
+<div class="box box-blue">
+  <p class="box-title">🎯 EXPLICATION</p>
+  <p><code>nth-child(1)</code> = la barre du haut → monte de 7px (la moitié de l'espacement total) et tourne à 45°.</p>
+  <p><code>nth-child(2)</code> = la barre du milieu → disparaît (opacity 0 + scaleX 0).</p>
+  <p><code>nth-child(3)</code> = la barre du bas → monte de 7px et tourne à -45°.</p>
+  <p>Le <code>cubic-bezier(0.23, 1, 0.32, 1)</code> donne un effet "spring" — rapide au début, élastique à la fin. Beaucoup plus premium que <code>ease</code>.</p>
+</div>
+
+<h2 id="a2">4.2 — Transitions hover enrichies</h2>
+
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS — Hover premium sur les boutons</span></div>
+  <pre><span class="cm">/* Bouton principal — glow orange au hover */</span>
+<span class="sel">.btn-primary</span> {
+  <span class="prop">transition</span>: <span class="val">transform 0.25s ease, box-shadow 0.25s ease, background 0.2s ease</span>;
+}
+<span class="sel">.btn-primary:hover</span> {
+  <span class="prop">transform</span>: <span class="val">translateY(-2px)</span>;
+  <span class="prop">box-shadow</span>: <span class="val">0 8px 24px rgba(247, 148, 29, 0.4)</span>;
+  <span class="prop">background</span>: <span class="val">var(--color-primary-dark)</span>;
+}
+<span class="sel">.btn-primary:active</span> {
+  <span class="prop">transform</span>: <span class="val">translateY(0)</span>;
+  <span class="prop">box-shadow</span>: <span class="val">none</span>;
+}
+
+<span class="cm">/* Nav links — ligne qui apparaît sous le texte */</span>
+<span class="sel">.nav a</span> {
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">padding-bottom</span>: <span class="num">4px</span>;
+}
+<span class="sel">.nav a::after</span> {
+  <span class="prop">content</span>: <span class="val">''</span>;
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">bottom</span>: <span class="num">0</span>;
+  <span class="prop">left</span>: <span class="num">0</span>;
+  <span class="prop">width</span>: <span class="num">0</span>;                <span class="cm">/* commence à 0 */</span>
+  <span class="prop">height</span>: <span class="num">2px</span>;
+  <span class="prop">background</span>: <span class="val">var(--color-primary)</span>;
+  <span class="prop">transition</span>: <span class="val">width 0.3s ease</span>;
+}
+<span class="sel">.nav a:hover::after</span>,
+<span class="sel">.nav a.active::after</span> {
+  <span class="prop">width</span>: <span class="num">100%</span>;           <span class="cm">/* grandit jusqu'à 100% au hover */</span>
+}
+
+<span class="cm">/* Cards véhicules — image zoom + ombre au hover */</span>
+<span class="sel">.vehicle-card</span> {
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+  <span class="prop">transition</span>: <span class="val">transform 0.3s ease, box-shadow 0.3s ease</span>;
+}
+<span class="sel">.vehicle-card:hover</span> {
+  <span class="prop">transform</span>: <span class="val">translateY(-6px)</span>;
+  <span class="prop">box-shadow</span>: <span class="val">0 20px 48px rgba(0,0,0,0.15)</span>;
+}
+<span class="sel">.vehicule-image</span> {
+  <span class="prop">transition</span>: <span class="val">transform 0.5s ease</span>;
+}
+<span class="sel">.vehicle-card:hover .vehicule-image</span> {
+  <span class="prop">transform</span>: <span class="val">scale(1.06)</span>;  <span class="cm">/* zoom sur l'image au hover de la card */</span>
+}</pre>
+</div>
+
+<h2 id="a3">4.3 — Scroll-reveal avec Intersection Observer (JS)</h2>
+<p>C'est l'animation la plus professionnelle pour un site vitrine : les sections apparaissent au scroll au lieu d'être toutes chargées d'un coup.</p>
+
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS + JS — Scroll reveal</span></div>
+  <pre><span class="cm">/* CSS — état initial caché */</span>
+<span class="sel">.reveal</span> {
+  <span class="prop">opacity</span>: <span class="num">0</span>;
+  <span class="prop">transform</span>: <span class="val">translateY(32px)</span>;
+  <span class="prop">transition</span>: <span class="val">opacity 0.6s ease, transform 0.6s ease</span>;
+}
+<span class="sel">.reveal.visible</span> {
+  <span class="prop">opacity</span>: <span class="num">1</span>;
+  <span class="prop">transform</span>: <span class="val">translateY(0)</span>;
+}
+<span class="cm">/* Délai en cascade sur les enfants */</span>
+<span class="sel">.reveal:nth-child(2)</span> { <span class="prop">transition-delay</span>: <span class="num">0.1s</span>; }
+<span class="sel">.reveal:nth-child(3)</span> { <span class="prop">transition-delay</span>: <span class="num">0.2s</span>; }
+<span class="sel">.reveal:nth-child(4)</span> { <span class="prop">transition-delay</span>: <span class="num">0.3s</span>; }
+
+<span class="cm">/* JS — ajoute la classe .visible quand l'élément entre dans le viewport */</span>
+<span class="cm">// Ajoute class="reveal" aux sections que tu veux animer dans le HTML</span>
+<span class="cm">// Puis dans un &lt;script&gt; en bas de page :</span>
+
+<span class="fn">const</span> observer = <span class="kw">new</span> <span class="fn">IntersectionObserver</span>(
+  (entries) => {
+    entries.<span class="fn">forEach</span>(entry => {
+      <span class="kw">if</span> (entry.isIntersecting) {
+        entry.target.classList.<span class="fn">add</span>(<span class="val">'visible'</span>);
+      }
+    });
+  },
+  { <span class="prop">threshold</span>: <span class="num">0.15</span> }  <span class="cm">/* déclenche quand 15% de l'élément est visible */</span>
+);
+
+document.<span class="fn">querySelectorAll</span>(<span class="val">'.reveal'</span>).<span class="fn">forEach</span>(el => observer.<span class="fn">observe</span>(el));</pre>
+</div>
+
+<h2 id="a4">4.4 — Header sticky avec blur au scroll</h2>
+<p>Le header actuel a un fond dégradé transparent. Quand tu scrolles, il devrait devenir opaque avec un effet de verre dépoli. C'est une des animations les plus premium d'un site moderne.</p>
+
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS + JS — Header sticky glass</span></div>
+  <pre><span class="cm">/* CSS */</span>
+<span class="sel">.header</span> {
+  <span class="prop">position</span>: <span class="val">fixed</span>;
+  <span class="prop">top</span>: <span class="num">0</span>; <span class="prop">left</span>: <span class="num">0</span>; <span class="prop">right</span>: <span class="num">0</span>;
+  <span class="prop">z-index</span>: <span class="num">100</span>;
+  <span class="prop">transition</span>: <span class="val">background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease</span>;
+}
+<span class="sel">.header.scrolled</span> {
+  <span class="prop">background</span>: <span class="val">rgba(0, 0, 0, 0.75)</span>;
+  <span class="prop">backdrop-filter</span>: <span class="val">blur(16px) saturate(180%)</span>;
+  <span class="prop">-webkit-backdrop-filter</span>: <span class="val">blur(16px) saturate(180%)</span>;
+  <span class="prop">box-shadow</span>: <span class="val">0 1px 0 rgba(255,255,255,0.1)</span>;
+}
+
+<span class="cm">/* JS */</span>
+window.<span class="fn">addEventListener</span>(<span class="val">'scroll'</span>, () => {
+  <span class="kw">const</span> header = document.<span class="fn">querySelector</span>(<span class="val">'.header'</span>);
+  header.classList.<span class="fn">toggle</span>(<span class="val">'scrolled'</span>, window.scrollY > <span class="num">60</span>);
+});</pre>
+</div>
+
+<div class="box box-blue">
+  <p class="box-title">💡 backdrop-filter EXPLIQUÉ</p>
+  <p><code>backdrop-filter</code> applique un effet visuel sur ce qui se trouve <strong>derrière</strong> l'élément. <code>blur(16px)</code> floute le fond, <code>saturate(180%)</code> accentue les couleurs. C'est ce qui donne l'effet "verre dépoli" qu'on voit sur iOS, macOS, et les sites premium comme Apple.com.</p>
+  <p>⚠️ Il faut que l'élément ait un background semi-transparent (<code>rgba(..., 0.75)</code>) pour que l'effet soit visible. Un background opaque à 100% cache l'effet derrière.</p>
+</div>
+
+<h2 id="a5">4.5 — Skeleton loading (premium)</h2>
+<p>Affiche des "fantômes" gris animés pendant que les images chargent. Très courant sur Airbnb, Booking.com, YouTube.</p>
+
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS — Skeleton shimmer</span></div>
+  <pre><span class="sel">.skeleton</span> {
+  <span class="prop">background</span>: <span class="val">linear-gradient(
+    90deg,
+    #e8e8e8 25%,
+    #f0f0f0 50%,
+    #e8e8e8 75%
+  )</span>;
+  <span class="prop">background-size</span>: <span class="num">200% 100%</span>;
+  <span class="prop">animation</span>: <span class="val">shimmer 1.5s infinite</span>;
+  <span class="prop">border-radius</span>: <span class="val">var(--radius-md)</span>;
+}
+
+<span class="kw">@keyframes</span> shimmer {
+  <span class="num">0%</span>   { <span class="prop">background-position</span>: <span class="num">200% 0</span>; }
+  <span class="num">100%</span> { <span class="prop">background-position</span>: <span class="num">-200% 0</span>; }
+}
+
+<span class="cm">/* Utilisation sur une card véhicule */</span>
+<span class="cm">&lt;div class="vehicle-card"&gt;</span>
+<span class="cm">  &lt;div class="skeleton vehicule-image"&gt;&lt;/div&gt;</span>
+<span class="cm">  &lt;div class="skeleton" style="height:16px;margin:12px 0;width:60%"&gt;&lt;/div&gt;</span>
+<span class="cm">  &lt;div class="skeleton" style="height:12px;width:40%"&gt;&lt;/div&gt;</span>
+<span class="cm">&lt;/div&gt;</span></pre>
+</div>
+
+<h2 id="a6">4.6 — Micro-animations utiles</h2>
+
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS — Collection de micro-animations</span></div>
+  <pre><span class="cm">/* 1. Pulse sur le bouton CTA (attire l'œil) */</span>
+<span class="kw">@keyframes</span> pulse-ring {
+  <span class="num">0%</span>   { <span class="prop">box-shadow</span>: <span class="val">0 0 0 0 rgba(247,148,29,0.5)</span>; }
+  <span class="num">70%</span>  { <span class="prop">box-shadow</span>: <span class="val">0 0 0 12px rgba(247,148,29,0)</span>; }
+  <span class="num">100%</span> { <span class="prop">box-shadow</span>: <span class="val">0 0 0 0 rgba(247,148,29,0)</span>; }
+}
+<span class="sel">.btn-primary</span> {
+  <span class="prop">animation</span>: <span class="val">pulse-ring 2.5s ease-out infinite</span>;
+}
+<span class="sel">.btn-primary:hover</span> {
+  <span class="prop">animation</span>: <span class="val">none</span>;  <span class="cm">/* stoppe le pulse au hover */</span>
+}
+
+<span class="cm">/* 2. Compteur animé sur les stats */</span>
+<span class="kw">@keyframes</span> count-up {
+  <span class="num">from</span> { <span class="prop">opacity</span>: <span class="num">0</span>; <span class="prop">transform</span>: <span class="val">translateY(16px)</span>; }
+  <span class="num">to</span>   { <span class="prop">opacity</span>: <span class="num">1</span>; <span class="prop">transform</span>: <span class="val">translateY(0)</span>; }
+}
+
+<span class="cm">/* 3. Icône sociale — rotation au hover */</span>
+<span class="sel">.social-btn</span> {
+  <span class="prop">transition</span>: <span class="val">transform 0.3s ease, background 0.2s ease</span>;
+}
+<span class="sel">.social-btn:hover</span> {
+  <span class="prop">transform</span>: <span class="val">rotate(8deg) scale(1.1)</span>;
+  <span class="prop">background</span>: <span class="val">var(--color-primary)</span>;
+}
+
+<span class="cm">/* 4. Tab active — slide indicator */</span>
+<span class="sel">.search-tabs</span> { <span class="prop">position</span>: <span class="val">relative</span>; }
+<span class="sel">.tab-btn</span> {
+  <span class="prop">transition</span>: <span class="val">color 0.25s ease</span>;
+}
+<span class="sel">.tab-btn.active</span> {
+  <span class="prop">color</span>: <span class="val">var(--color-primary)</span>;
+}
+
+<span class="cm">/* 5. Star rating — remplissage au hover (CSS seul) */</span>
+<span class="sel">.stars .star</span> {
+  <span class="prop">transition</span>: <span class="val">transform 0.15s ease</span>;
+  <span class="prop">cursor</span>: <span class="val">default</span>;
+}
+<span class="sel">.stars:hover .star</span> {
+  <span class="prop">transform</span>: <span class="val">scale(1.2)</span>;
+}</pre>
+</div>
+
+<div class="section-break">── ✦ ──</div>
+
+<!-- ═══════ PARTIE 5 — ARCHITECTURE -->
+<h1 class="part-title pt-purple" id="part5">PARTIE 5 — Architecture 3 pages 🏗</h1>
+
+<h2 id="p1">5.1 — Structure des fichiers</h2>
+
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">Structure recommandée</span></div>
+  <pre>xlautoo/
+├── index.html          ← Accueil (page actuelle)
+├── vehicules.html      ← Galerie / catalogue
+├── apropos.html        ← À propos + Contact (même page)
+├── style.css           ← CSS commun aux 3 pages
+└── image/
+    └── ...</pre>
+</div>
+
+<div class="box box-blue">
+  <p class="box-title">💡 LIENS ENTRE PAGES vs LIENS ID</p>
+  <ul>
+    <li><strong>Lien vers une autre page</strong> : <code>&lt;a href="vehicules.html"&gt;Nos véhicules&lt;/a&gt;</code></li>
+    <li><strong>Lien vers une section de la même page</strong> : <code>&lt;a href="#recherche"&gt;Louer&lt;/a&gt;</code> → fonctionne si la section a <code>id="recherche"</code></li>
+    <li><strong>Lien depuis une autre page vers une section d'accueil</strong> : <code>&lt;a href="index.html#recherche"&gt;</code></li>
+  </ul>
+</div>
+
+<h2 id="p2">5.2 — Page Galerie véhicules (vehicules.html)</h2>
+<p>Cette page réutilise le même header et footer. Structure suggérée :</p>
+
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">HTML — vehicules.html (squelette)</span></div>
+  <pre>&lt;<span class="sel">header</span> <span class="prop">class</span>=<span class="val">"header"</span>&gt;...même navbar...&lt;/<span class="sel">header</span>&gt;
+
+<span class="cm">&lt;!-- Hero simple sans image de fond --&gt;</span>
+&lt;<span class="sel">section</span> <span class="prop">class</span>=<span class="val">"page-hero"</span>&gt;
+  &lt;<span class="sel">h1</span>&gt;Nos véhicules&lt;/<span class="sel">h1</span>&gt;
+  &lt;<span class="sel">p</span>&gt;500+ véhicules disponibles à Dakar&lt;/<span class="sel">p</span>&gt;
+&lt;/<span class="sel">section</span>&gt;
+
+<span class="cm">&lt;!-- Filtres + grille --&gt;</span>
+&lt;<span class="sel">section</span> <span class="prop">class</span>=<span class="val">"vehicules"</span>&gt;
+  &lt;<span class="sel">aside</span> <span class="prop">class</span>=<span class="val">"filters-panel"</span>&gt;
+    <span class="cm">&lt;!-- Filtres : type, prix, disponibilité --&gt;</span>
+  &lt;/<span class="sel">aside</span>&gt;
+  &lt;<span class="sel">div</span> <span class="prop">class</span>=<span class="val">"vehicles-grid"</span>&gt;
+    <span class="cm">&lt;!-- Cards véhicules --&gt;</span>
+  &lt;/<span class="sel">div</span>&gt;
+&lt;/<span class="sel">section</span>&gt;
+
+&lt;<span class="sel">footer</span> <span class="prop">class</span>=<span class="val">"footer"</span>&gt;...même footer...&lt;/<span class="sel">footer</span>&gt;</pre>
+</div>
+
+<h2 id="p3">5.3 — Page À propos & Contact (apropos.html)</h2>
+<p>Les deux sections sur la même page, reliées par des ancres :</p>
+
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">HTML — apropos.html (squelette)</span></div>
+  <pre>&lt;<span class="sel">section</span> <span class="prop">id</span>=<span class="val">"a-propos"</span>&gt;
+  <span class="cm">&lt;!-- Histoire de l'entreprise, équipe, valeurs --&gt;</span>
+  &lt;<span class="sel">h2</span>&gt;Notre histoire&lt;/<span class="sel">h2</span>&gt;
+  &lt;<span class="sel">p</span>&gt;XLauto, fondée en 2026 à Dakar...&lt;/<span class="sel">p</span>&gt;
+&lt;/<span class="sel">section</span>&gt;
+
+&lt;<span class="sel">section</span> <span class="prop">id</span>=<span class="val">"contact"</span>&gt;
+  <span class="cm">&lt;!-- Formulaire + carte Google Maps + infos --&gt;</span>
+  &lt;<span class="sel">form</span>&gt;
+    &lt;<span class="sel">input</span> <span class="prop">type</span>=<span class="val">"text"</span> <span class="prop">placeholder</span>=<span class="val">"Votre nom"</span>/&gt;
+    &lt;<span class="sel">input</span> <span class="prop">type</span>=<span class="val">"email"</span> <span class="prop">placeholder</span>=<span class="val">"Votre email"</span>/&gt;
+    &lt;<span class="sel">textarea</span> <span class="prop">placeholder</span>=<span class="val">"Votre message"</span>&gt;&lt;/<span class="sel">textarea</span>&gt;
+    &lt;<span class="sel">button</span> <span class="prop">type</span>=<span class="val">"submit"</span>&gt;Envoyer&lt;/<span class="sel">button</span>&gt;
+  &lt;/<span class="sel">form</span>&gt;
+&lt;/<span class="sel">section</span>&gt;</pre>
+</div>
+
+<div class="section-break">── ✦ ──</div>
+
+<!-- ═══════ PARTIE 6 — PROPRIÉTÉS CSS AVANCÉES -->
+<h1 class="part-title pt-blue" id="part6">PARTIE 6 — Propriétés CSS avancées à découvrir 🧠</h1>
+
+<h2 id="c1">6.1 — backdrop-filter</h2>
+<p>Tu l'as déjà sur <code>.btn-secondary</code>. Voici toutes ses possibilités :</p>
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS</span></div>
+  <pre><span class="sel">.glass-card</span> {
+  <span class="prop">background</span>: <span class="val">rgba(255,255,255,0.1)</span>;
+  <span class="prop">backdrop-filter</span>:
+    <span class="val">blur(16px)</span>        <span class="cm">/* floute ce qui est derrière */</span>
+    <span class="val">saturate(150%)</span>    <span class="cm">/* accentue les couleurs */</span>
+    <span class="val">brightness(1.1)</span>; <span class="cm">/* légèrement plus lumineux */</span>
+  <span class="prop">-webkit-backdrop-filter</span>: <span class="val">blur(16px) saturate(150%)</span>; <span class="cm">/* Safari */</span>
+  <span class="prop">border</span>: <span class="val">1px solid rgba(255,255,255,0.2)</span>;
+}</pre>
+</div>
+
+<h2 id="c2">6.2 — scroll-snap</h2>
+<p>Crée un défilement qui "clique" d'un élément à l'autre, parfait pour une galerie mobile.</p>
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS</span></div>
+  <pre><span class="sel">.slider</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">overflow-x</span>: <span class="val">auto</span>;
+  <span class="prop">scroll-snap-type</span>: <span class="val">x mandatory</span>; <span class="cm">/* snap horizontal, obligatoire */</span>
+  <span class="prop">scroll-behavior</span>: <span class="val">smooth</span>;
+  <span class="prop">-webkit-overflow-scrolling</span>: <span class="val">touch</span>; <span class="cm">/* iOS scroll fluide */</span>
+}
+<span class="sel">.slide</span> {
+  <span class="prop">flex-shrink</span>: <span class="num">0</span>;
+  <span class="prop">width</span>: <span class="num">100%</span>;
+  <span class="prop">scroll-snap-align</span>: <span class="val">start</span>; <span class="cm">/* snap au début de chaque item */</span>
+}</pre>
+</div>
+
+<h2 id="c3">6.3 — aspect-ratio</h2>
+<p>Maintient un ratio largeur/hauteur fixe automatiquement. Fini les <code>height</code> hardcodés !</p>
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS</span></div>
+  <pre><span class="sel">.vehicule-image</span> {
+  <span class="prop">width</span>: <span class="num">100%</span>;
+  <span class="prop">aspect-ratio</span>: <span class="val">16 / 9</span>;  <span class="cm">/* ratio cinéma */</span>
+  <span class="cm">/* aspect-ratio: 4 / 3;   ratio photo classique */</span>
+  <span class="cm">/* aspect-ratio: 1 / 1;   carré */</span>
+  <span class="prop">object-fit</span>: <span class="val">cover</span>;
+}
+<span class="cm">/* Remplace : height: clamp(160px, 18vw, 260px) → plus propre */</span></pre>
+</div>
+
+<h2 id="c4">6.4 — clamp() — tu l'utilises déjà, mais voici tout son potentiel</h2>
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS</span></div>
+  <pre><span class="cm">/* clamp(min, préféré, max) */</span>
+<span class="sel">.hero-title</span> {
+  <span class="prop">font-size</span>: <span class="val">clamp(28px, 6vw, 58px)</span>;
+  <span class="cm">/* 28px sur mobile, 6% de la largeur en tablette, max 58px desktop */</span>
+  <span class="cm">/* Remplace toutes les media queries pour le font-size ! */</span>
+}
+<span class="sel">.section</span> {
+  <span class="prop">padding</span>: <span class="val">clamp(32px, 8vw, 80px) clamp(20px, 6vw, 80px)</span>;
+  <span class="cm">/* padding vertical et horizontal s'adaptent automatiquement */</span>
+}</pre>
+</div>
+
+<h2 id="c5">6.5 — :is() et :where()</h2>
+<p>Évitent de répéter les mêmes sélecteurs.</p>
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS</span></div>
+  <pre><span class="cm">/* Sans :is() — répétitif */</span>
+<span class="sel">.btn-primary:hover</span>,
+<span class="sel">.btn-secondary:hover</span>,
+<span class="sel">.btn-contact:hover</span> { <span class="prop">opacity</span>: <span class="num">0.9</span>; }
+
+<span class="cm">/* Avec :is() — plus court, même résultat */</span>
+<span class="sel">:is(.btn-primary, .btn-secondary, .btn-contact):hover</span> {
+  <span class="prop">opacity</span>: <span class="num">0.9</span>;
+}
+
+<span class="cm">/* :where() est identique mais avec spécificité 0 */</span>
+<span class="cm">/* utile pour les styles par défaut faciles à surcharger */</span></pre>
+</div>
+
+<h2 id="c6">6.6 — CSS Custom Properties dynamiques</h2>
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS + HTML</span></div>
+  <pre><span class="cm">/* Une variable définie inline dans le HTML */</span>
+<span class="cm">&lt;div class="star-rating" style="--rating: 4"&gt;&lt;/div&gt;</span>
+
+<span class="sel">.star-rating::before</span> {
+  <span class="prop">content</span>: <span class="val">"★★★★★"</span>;
+  <span class="prop">background</span>: <span class="val">linear-gradient(
+    to right,
+    var(--color-primary) calc(var(--rating) / 5 * 100%),
+    #ddd calc(var(--rating) / 5 * 100%)
+  )</span>;
+  <span class="prop">-webkit-background-clip</span>: <span class="val">text</span>;
+  <span class="prop">-webkit-text-fill-color</span>: <span class="val">transparent</span>;
+}
+<span class="cm">/* Chaque card peut avoir son propre rating via l'attribut style */</span></pre>
+</div>
+
+<h2 id="c7">6.7 — @starting-style (CSS très récent, Chrome 117+)</h2>
+<p>Permet d'animer l'apparition d'un élément dès qu'il est inséré dans le DOM — sans JS !</p>
+<div class="code-block">
+  <div class="code-header"><div class="code-dots"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span></div><span class="code-label">CSS</span></div>
+  <pre><span class="sel">.modal</span> {
+  <span class="prop">opacity</span>: <span class="num">1</span>;
+  <span class="prop">transform</span>: <span class="val">translateY(0)</span>;
+  <span class="prop">transition</span>: <span class="val">opacity 0.3s, transform 0.3s</span>;
+}
+
+<span class="kw">@starting-style</span> {
+  <span class="sel">.modal</span> {
+    <span class="prop">opacity</span>: <span class="num">0</span>;
+    <span class="prop">transform</span>: <span class="val">translateY(16px)</span>;
+  }
+  <span class="cm">/* État de départ avant que la transition s'active */</span>
+  <span class="cm">/* Le navigateur anime automatiquement vers l'état normal */</span>
+}</pre>
+</div>
+
+<div class="section-break">── ✦ ──</div>
+
+<!-- ═══════ PARTIE 7 — PLAN D'ACTION -->
+<h1 class="part-title pt-green" id="part7">PARTIE 7 — Plan d'action priorisé 🎯</h1>
+
+<h3>🔴 Semaine 1 — Corriger les bugs critiques</h3>
+<div class="checklist">
+  <div class="check-item">
+    <span class="check-icon">🔴</span>
+    <div class="check-body">
+      <div class="check-title">Corriger <code>&lt;HTml&gt;</code> → <code>&lt;html&gt;</code></div>
+      <div class="check-desc">1 seconde à faire</div>
+    </div>
+  </div>
+  <div class="check-item">
+    <span class="check-icon">🔴</span>
+    <div class="check-body">
+      <div class="check-title">Ajouter <code>--border</code> dans <code>:root</code> ou remplacer par <code>--color-border</code></div>
+      <div class="check-desc">La bordure de la bottom-nav est actuellement invisible</div>
+    </div>
+  </div>
+  <div class="check-item">
+    <span class="check-icon">🔴</span>
+    <div class="check-body">
+      <div class="check-title">Masquer la bottom-nav sur desktop</div>
+      <div class="check-desc">Ajouter <code>.bottom-nav { display: none }</code> + media query <code>max-width: 768px</code></div>
+    </div>
+  </div>
+  <div class="check-item">
+    <span class="check-icon">🔴</span>
+    <div class="check-body">
+      <div class="check-title">Réparer le menu hamburger (règles CSS manquantes)</div>
+      <div class="check-desc">Ajouter les sélecteurs <code>:checked ~</code> vus en partie 3.2</div>
+    </div>
+  </div>
+  <div class="check-item">
+    <span class="check-icon">🔴</span>
+    <div class="check-body">
+      <div class="check-title">Supprimer les doublons CSS et corriger <code>padding-left: clamp</code></div>
+      <div class="check-desc">Fusionner les deux blocs <code>.hero-content</code>, supprimer le double <code>margin-bottom</code></div>
+    </div>
+  </div>
+</div>
+
+<h3>🟡 Semaine 2 — Responsive complet</h3>
+<div class="checklist">
+  <div class="check-item">
+    <span class="check-icon">🟡</span>
+    <div class="check-body">
+      <div class="check-title">Ajouter media query <code>max-width: 1024px</code> pour tablette</div>
+      <div class="check-desc">Header padding réduit, icônes masquées</div>
+    </div>
+  </div>
+  <div class="check-item">
+    <span class="check-icon">🟡</span>
+    <div class="check-body">
+      <div class="check-title">Ajouter media query <code>max-width: 768px</code> pour mobile</div>
+      <div class="check-desc">Hero title clamp, boutons empilés, search widget en colonne</div>
+    </div>
+  </div>
+  <div class="check-item">
+    <span class="check-icon">🟡</span>
+    <div class="check-body">
+      <div class="check-title">Tester sur les DevTools Chrome (F12 → icône mobile)</div>
+      <div class="check-desc">Tester sur : iPhone SE (375px), iPhone 14 (390px), iPad (768px), iPad Pro (1024px)</div>
+    </div>
+  </div>
+  <div class="check-item">
+    <span class="check-icon">🟡</span>
+    <div class="check-body">
+      <div class="check-title">Remplacer les <code>height</code> fixes par <code>aspect-ratio</code></div>
+      <div class="check-desc">Sur <code>.vehicule-image</code> : <code>aspect-ratio: 16/9</code></div>
+    </div>
+  </div>
+</div>
+
+<h3>🟢 Semaine 3 — Animations premium</h3>
+<div class="checklist">
+  <div class="check-item">
+    <span class="check-icon">🟢</span>
+    <div class="check-body">
+      <div class="check-title">Header sticky avec blur au scroll</div>
+      <div class="check-desc">CSS + 3 lignes de JS (partie 4.4)</div>
+    </div>
+  </div>
+  <div class="check-item">
+    <span class="check-icon">🟢</span>
+    <div class="check-body">
+      <div class="check-title">Scroll-reveal sur les sections</div>
+      <div class="check-desc">Ajouter class="reveal" + le JS Intersection Observer (partie 4.3)</div>
+    </div>
+  </div>
+  <div class="check-item">
+    <span class="check-icon">🟢</span>
+    <div class="check-body">
+      <div class="check-title">Hover enrichis sur cards et nav</div>
+      <div class="check-desc">Ligne sous nav links, zoom image au hover, translateY sur cards</div>
+    </div>
+  </div>
+  <div class="check-item">
+    <span class="check-icon">🟢</span>
+    <div class="check-body">
+      <div class="check-title">Pulse sur le bouton CTA principal</div>
+      <div class="check-desc">Animation <code>pulse-ring</code> (partie 4.6)</div>
+    </div>
+  </div>
+</div>
+
+<h3>🔵 Semaine 4 — Architecture 3 pages</h3>
+<div class="checklist">
+  <div class="check-item">
+    <span class="check-icon">🔵</span>
+    <div class="check-body">
+      <div class="check-title">Créer <code>vehicules.html</code> avec la galerie filtrée</div>
+      <div class="check-desc">Reprendre le composant .vehicules de index.html, ajouter un panneau de filtres latéral</div>
+    </div>
+  </div>
+  <div class="check-item">
+    <span class="check-icon">🔵</span>
+    <div class="check-body">
+      <div class="check-title">Créer <code>apropos.html</code> avec section contact + formulaire</div>
+      <div class="check-desc">Histoire XLauto, équipe, map Google, formulaire de contact</div>
+    </div>
+  </div>
+  <div class="check-item">
+    <span class="check-icon">🔵</span>
+    <div class="check-body">
+      <div class="check-title">Mettre à jour les liens dans la navbar et le footer</div>
+      <div class="check-desc">Remplacer tous les <code>href="#"</code> par les vrais chemins et ancres</div>
+    </div>
+  </div>
+  <div class="check-item">
+    <span class="check-icon">🔵</span>
+    <div class="check-body">
+      <div class="check-title">Pousser tout sur GitHub</div>
+      <div class="check-desc"><code>git add . && git commit -m "feat: version complète XLauto" && git push</code></div>
+    </div>
+  </div>
+</div>
+
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0 1.5rem"/>
+<p style="text-align:center;font-family:var(--mono);font-size:.8rem;color:var(--muted)">
+  DevLearn · Projet XLauto · Analyse &amp; Plan d'amélioration<br>
+  <span style="color:var(--border)">Document généré pour accompagner le parcours CSS → JS</span>
+</p>
+
+</div>
+</body>
+</html>

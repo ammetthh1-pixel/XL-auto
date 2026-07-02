@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<HTml lang="fr">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,14 +11,8 @@
     <section class="hero-section">
     <!-- ══ HEADER ══ -->
     <header class="header" data-node-id="n1" data-component="header">
-      <div class="menu-hamberguer">
-       <!-- Checkbox hack pour le menu mobile, sans JS -->
-      <input type="checkbox" id="menu-toggle" class="menu-toggle-input">
-      <label for="menu-toggle" class="menu-toggle" aria-label="Ouvrir le menu">
-        <span></span><span></span><span></span>
-      </label>
+      
       <div data-node-id="n2" class="logo" >XLauto</div>
-      </div>
        <nav data-node-id="n3" class="nav" >
         <a  data-node-id="n4" href="#" class="active">Accueil</a>
         <a data-node-id="n5" href="#">Nos véhicules</a>
@@ -35,7 +29,7 @@
           </svg>
         </button>
        <!-- Icône paramètres -->
-        <button data-node-id="n14" class="icon-btn" aria-label="Paramètres">
+        <button data-node-id="n14" class="icon-btn parametre" aria-label="Paramètres">
           <svg data-node-id="n15" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle data-node-id="n16" cx="12" cy="12" r="3"/>
             <path data-node-id="n17" d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
@@ -43,7 +37,13 @@
         </button>
         <button data-node-id="n18" class="btn-contact">Nous contacter</button>
       </div>
+       <!-- Checkbox hack pour le menu mobile, sans JS -->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle-input">
+      <label for="menu-toggle" class="menu-toggle" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </label>
     </header>
+    <main>
     <!-- ══ HERO ══ -->
      <section data-node-id="n19" class="hero">
         <div data-node-id="n20" class="hero-overlay"></div>
@@ -174,7 +174,7 @@
               <span data-node-id="n122" class="spec-tag">⚡ Électrique</span>   
             </div>
             <div data-node-id="n123" class="card-footer">
-              <div data-node-id="n124" class="card-price">45€<span data-node-id="n125">/jour</span></div>
+              <div data-node-id="n124" class="card-price">70.000fca<span data-node-id="n125">/jour</span></div>
               <button data-node-id="n126" class="btn-reserve">Réserver</button>
             </div>
           </div>
@@ -195,8 +195,8 @@
               <span data-node-id="n135" class="spec-tag">Automatique</span>
             </div>
             <div data-node-id="n136" class="card-footer">
-              <div data-node-id="n137" class="card-price">68500€</div>
-              <button data-node-id="n138" class="btn-reserve">Réserver</button>
+              <div data-node-id="n137" class="card-price">1.000.000fca</div>
+              <button data-node-id="n138" class="btn-reserve">Voir les détails</button>
             </div>
           </div>
         </div>
@@ -216,7 +216,7 @@
               <span data-node-id="n147" class="spec-tag">Automatique</span>
             </div>
             <div data-node-id="n148" class="card-footer">
-              <div data-node-id="n149" class="card-price">120€<span data-node-id="n150">/jour</span></div>
+              <div data-node-id="n149" class="card-price">120.000fca<span data-node-id="n150">/jour</span></div>
               <button data-node-id="n151" class="btn-reserve">Réserver</button>
             </div>
           </div>
@@ -327,9 +327,10 @@
         </div>
       </div>
      </section> 
-
+     </main>
      <!-- ══ FOOTER ══ -->
       <footer data-node-id="n237" class="footer" data-component="footer">
+        <div class="footer-content">
         <div data-node-id="n238" class="footer-top">
           <div data-node-id="n239" class="footer-brand">
             <div data-node-id="n240" class="logo">XLauto</div>
@@ -388,6 +389,7 @@
             <a data-node-id="n296" href="#">CGU</a>
             <a data-node-id="n297" href="#">Cookies</a>
           </div>
+        </div>
         </div>
          <nav data-node-id="n232" class="bottom-nav" data-role="bottom-nav" data-component="tab-bar">
         <a data-node-id="n233" href="#" class="nav-item active">

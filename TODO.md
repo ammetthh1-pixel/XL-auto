@@ -1,47 +1,72 @@
-# TODO - Menu hamburger + Hero
+# TODO - Améliorations à faire sur XLauto
 
-## Ce qui a été corrigé
+## Ce qui a déjà été préparé
+- Le menu mobile a été rendu fonctionnel.
+- Un breakpoint tablette a été ajouté dans [style.css](style.css) pour améliorer l'affichage entre 701 px et 1024 px.
+- Le header, le hero, le widget de recherche, les cartes, la section pourquoi nous choisir, les témoignages et le footer ont été adaptés pour une lecture plus confortable sur tablette.
+- Des animations légères en CSS ont été ajoutées pour donner un rendu plus premium.
 
-Le menu hamburger ne fonctionnait pas parce que la règle CSS qui devait l'afficher était incorrecte.
+## À améliorer dans [index.html](index.html)
 
-### Ce que j'avais fait avant
-- J'avais utilisé un sélecteur CSS qui ne correspondait pas à la structure réelle du HTML.
-- La case à cocher du menu mobile n'était donc pas reliée correctement à la navigation.
-- Résultat : au clic, le menu ne s'ouvrait pas.
+### 1. Structure HTML
+- Ajouter un élément principal autour du contenu pour améliorer la sémantique : `main`.
+- Vérifier que chaque section a un intitulé clair et que les boutons d'action sont cohérents.
+- Si vous voulez un site plus propre, remplacer certains blocs répétitifs par des composants réutilisables plus tard.
 
-### Ce qui a été changé
-- Le sélecteur CSS a été remplacé par une version compatible avec la structure du fichier HTML.
-- La navigation mobile s'affiche maintenant correctement lorsque la case à cocher est activée.
-- Le fond du menu mobile a aussi été ajusté pour un rendu plus cohérent.
+### 2. Liens et navigation
+- Rendre les liens de navigation réels vers de vraies pages ou ancres internes.
+- Remplacer certains boutons qui servent uniquement de visuels par des liens si nécessaire.
+- Prévoir un menu mobile plus propre avec un bouton de fermeture explicite.
 
-## Retour sur le travail depuis le hero
-- Le hero possède une bonne structure visuelle avec un bon contraste entre le texte et l'image.
-- Le cadrage de l'image a été amélioré pour mieux mettre en valeur la voiture.
-- Le widget de recherche est bien positionné, mais il peut encore gagner en espace en dessous pour laisser respirer la section suivante.
-- La version mobile est correcte, mais l'espacement et la taille du texte peuvent encore être ajustés pour un rendu plus fluide.
+### 3. Accessibilité
+- Ajouter des `aria-label` sur les boutons si certains libellés ne sont pas assez explicites.
+- Vérifier le contraste des textes sur les fonds sombres.
+- Garder l'ordre logique du contenu pour les lecteurs d'écran.
 
-## Améliorations recommandées
+### 4. Contenu et présentation
+- Ajouter un peu plus de texte autour des sections pour raconter l'histoire de la marque.
+- Uniformiser les intitulés et les espaces entre les blocs.
+- Réduire le nombre de répétitions dans les textes si l'objectif est un rendu plus premium.
 
-### 1. Animation d'ouverture
-- Ajouter une transition CSS sur l'apparition du menu.
-- Utiliser `opacity` et `transform` pour un effet plus fluide.
-- Exemple : faire apparaître le menu avec un effet de glissement depuis le haut.
+## À améliorer dans [style.css](style.css)
 
-### 2. Couleur de fond adaptée
-- Choisir une couleur de fond plus cohérente avec le design global du site.
-- Utiliser une teinte plus sombre ou plus proche de la palette du header.
-- Vérifier que le contraste reste bon avec les liens du menu.
+### 1. Responsive tablette
+- Vérifier l'affichage du header sur tablette avec une largeur réelle de 768 px et 1024 px.
+- Ajuster la taille des boutons du hero si le texte est trop long.
+- Faire en sorte que le widget de recherche reste bien aligné sans casser les colonnes.
+- Tester si les cartes de véhicules gardent une belle proportion sur écran intermédiaire.
 
-### 3. Meilleur comportement sur petit écran
-- Vérifier que le menu prend toute la largeur disponible sur mobile.
-- Ajouter un espacement plus confortable entre les liens.
-- S'assurer que le menu ne chevauche pas le contenu au-dessous.
-- Tester l'affichage sur plusieurs tailles d'écran.
+### 2. Responsive mobile
+- Continuer à tester le menu mobile sur plusieurs tailles d'écran.
+- Masquer un second élément d'interface si l'espace devient trop réduit.
+- Garder un espacement plus généreux entre les boutons et les blocs de texte.
+- S'assurer que le footer ne soit pas trop dense sur petit écran.
 
-### 4. Espacement du widget de recherche
-- Garder un peu plus d'espace sous la section pour que le contenu suivant respire.
-- Ajuster les marges sur mobile pour éviter un rendu trop compact.
+### 3. Animations et interactions
+- Ajouter une transition plus douce au menu mobile lors de son ouverture.
+- Animer légèrement les cartes au survol pour un effet plus premium.
+- Faire ressortir les boutons CTA avec un effet plus visible sans les rendre trop agressifs.
 
-### 5. Bouton de recherche
-- Le bouton a été rendu à largeur complète comme les champs d’entrée pour un rendu plus homogène.
-- Un effet hover léger a été ajouté pour améliorer l’interaction visuelle.
+### 4. Cohérence visuelle
+- Harmoniser les espacements entre les sections.
+- Vérifier les marges autour du hero, du widget de recherche et des sections suivantes.
+- Ajuster la taille des titres pour éviter qu'ils paraissent trop grands ou trop petits selon la résolution.
+
+### 5. Styles avancés
+- Ajouter un état hover plus propre sur les liens de navigation.
+- Créer une version plus élégante des boutons de filtre et des cartes de véhicules.
+- Préparer une palette plus raffinée si vous voulez un rendu encore plus professionnel.
+
+## À faire plus tard : JavaScript
+- Ajouter un menu mobile vraiment interactif avec ouverture/fermeture.
+- Permettre de changer d'onglet dans le widget de recherche.
+- Créer de petites animations au scroll ou au survol.
+- Ajouter des interactions sur les filtres de véhicules si vous décidez de rendre la page dynamique.
+
+## Ordre conseillé pour progresser
+1. Vérifier l'affichage sur tablette avec plusieurs largeurs.
+2. Ajuster le header et le hero.
+3. Affiner les sections de véhicules et de témoignages.
+4. Ajouter l'accessibilité et la cohérence des textes.
+5. Ensuite seulement passer au JavaScript.
+
