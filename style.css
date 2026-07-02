@@ -132,7 +132,7 @@ html {
    .nav{
     display: none;
     position: fixed;
-    inset: 70px 400px 0 0;      /* inset = top right bottom left */
+    inset: 70px auto 0 0;      /* inset = top right bottom left */
     background-color:#222020;
     flex-direction: column;
     align-items: stretch;
