@@ -419,9 +419,10 @@ html {
     max-width: 520px;
   }
   .search-widget{
-    margin: 0 20px 24px;
-    padding: 24px 20px 32px;
+    margin: 0 16px 16px;
+    padding: 20px 16px;
     border: 1px solid rgba(232, 232, 232, 0.9);
+    border-radius: 12px;
   }
   .search-tabs{
     gap: 2px;
@@ -430,18 +431,17 @@ html {
     padding: 10px 0px;
     gap: 10px;
   }
-  .search-fields{
-    display:flex;
-    flex-direction: column;
-    gap: 1rem;
+  .search-fields {
+    grid-template-columns: 1fr 1fr; /* 2 colonnes */
   }
-  .field-group,
-  .field-input, .btn-search{
-    width: 100%;
+  /* Champ lieu prend toute la largeur */
+  .search-fields .field-group:first-child {
+    grid-column: 1 / -1;
   }
-  .reach-btn{
-    width: 100%;
-    margin-bottom: 0;
+
+  /* Bouton recherche prend toute la largeur */
+  .reach-btn {
+    grid-column: 1 / -1;
   }
   
 }
