@@ -31,7 +31,7 @@ html {
 
 /* ── HEADER ── */
 .header {
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(255,255,255,0.12);
     height: 72px;
     display: flex;
     align-items: center;
@@ -45,12 +45,7 @@ html {
     z-index: 100;
     transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
 }
-.header.scrolled {
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.1);
-}
+
 
 .logo {
     font-family: var(--font-display);
@@ -276,6 +271,7 @@ html {
     gap: 0;
     margin-bottom: 24px;
     border-bottom: 2px solid var(--color-border);
+     position: relative;
 }
 .tab-btn {
     padding: 10px 24px;
@@ -288,7 +284,7 @@ html {
     border-bottom: 3px solid transparent;
     margin-bottom: -2px;
     font-family: var(--font-body);
-    transition: all .2s;
+    transition: color 0.25s ease;
 }
 .tab-btn.active {
     color: var(--color-primary);
@@ -383,6 +379,20 @@ html {
         transform: translateY(0);
     }
 }
+/* 2. Compteur animé sur les stats */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* 5. Star rating — remplissage au hover (CSS seul) */
+.stars .star {
+  transition: transform 0.15s ease;
+  cursor: default;
+}
+.stars:hover .star {
+  transform: scale(1.2);
+}
+
 
 /* ── FEATURES ── */
 .features {
@@ -811,6 +821,7 @@ html {
         gap: 20px;
         padding-left: 1px;
         padding-right: 1px;
+        background: rgba(255,255,255,0.85);
     }
     .menu-toggle {
         display: flex;
@@ -820,7 +831,7 @@ html {
         display: none;
         position: fixed;
         inset: 70px auto 0 0;
-         background: rgba(0, 0, 0, 0.75);
+        background: rgba(255,255,255,0.85);
         flex-direction: column;
         align-items: stretch;
         padding: 1.5rem 2rem 2rem;
@@ -828,6 +839,17 @@ html {
         border-radius: 0 0 var(--radius-lg) var(--radius-lg);
         z-index: 99;
         gap: 1.1rem;
+    }
+    .nav a {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--color-ink);
+    }
+    .menu-toggle span{
+        background: var(--color-ink);
+    }
+    .icon-btn {
+        color: var(--color-ink);
     }
     .header:has(.menu-toggle-input:checked) .nav {
         display: flex;
@@ -1017,4 +1039,16 @@ html {
     .header {
         padding-left: 0;
     }
+}
+
+/* Desktop-only: apply scrolled visual only on large screens to avoid mobile nav overlap */
+@media (min-width: 768px) {
+    .header.scrolled {
+         background: rgba(255,255,255,.85);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        box-shadow: 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .header.scrolled .nav a { color: var(--c-ink); }
+    .header.scrolled .icon-btn { color: var(--c-ink); }
 }
