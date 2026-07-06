@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XLauto</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+     <!-- Polices Google : une pour les titres (élégante), une pour le texte (lisible) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +16,8 @@
     <!-- ══ HEADER ══ -->
     <header class="header" data-node-id="n1" data-component="header">
       
-      <div data-node-id="n2" class="logo" >XLauto</div>
+      <a href="#" data-node-id="n2" class="logo" ><span class="logo-dot"></span> XLauto
+      </a>
       <div class="nav-panel">
        <nav data-node-id="n3" class="nav" >
         <a  data-node-id="n4" href="#" class="active">Accueil</a>
@@ -36,7 +41,9 @@
             <path data-node-id="n17" d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
           </svg>
         </button>
-        <button data-node-id="n18" class="btn-contact">Nous contacter</button>
+        <a href="#" data-node-id="n18" class="btn-contact btn-sm"> Réserver
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
        <!-- Checkbox hack pour le menu mobile, sans JS -->
       <input type="checkbox" id="menu-toggle" class="menu-toggle-input">
@@ -143,9 +150,12 @@
           </div>
         </div>
    </section>
-   
+   <!-- ════════════════════════════════════════════════════════════════════
+         VEHICULES — cartes produit avec image, spécifications et prix
+         ════════════════════════════════════════════════════════════════════ -->
     <section data-node-id="n98" class="vehicules" data-component="vehicules-section">
       <div data-node-id="n99" class="section-header">
+        <span class="eyebrow"><span class="eyebrow-dot"></span>Notre sélection</span>
         <h2 data-node-id="n100" class="section-title">Découvrez <span data-node-id="101">nos véhicules</span></h2>
         <p data-node-id="n102" class="section-subtitle">Location ou achat, nous avons le véhicule qu'il vous faut.</p>
       </div>
@@ -230,7 +240,7 @@
     <!-- ══ WHY US ══ -->
      <section data-node-id="n152" class="why-us" data-component="why-us" aria-labelledby="why-us-title">
       <div data-node-id="n186" class="why-content">
-      <div data-node-id="153" class="section-label">Pourquoi nous choisir</div>
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Pourquoi nous choisir</span>
       <h2 id="why-us-title" data-node-id="154" class="section-title">L'excellence <span data-node-id="n155">automobile</span><br>à votre service</h2>
       <p data-node-id="n156">Depuis 2010, XLauto est le partenaire de confiance de milliers de conducteurs en France.</p>
       <ul data-node-id="n157" class="why-list">
@@ -240,7 +250,7 @@
           </div>
           <div data-node-id="n162" class="why-item-text">
             <h4 data-node-id="n163">Assurance tous risques incluse</h4>
-            <p data-node-id="n164">Chaque véhicule loué est couvert par une assurance complète sans franchise cachée.</p>
+            <p data-node-id="n164">Chaque location est couverte sans franchise cachée.</p>
           </div>
         </li>
         <li data-node-id="n165" class="why-item">
@@ -249,7 +259,7 @@
             </div>
             <div data-node-id="n169" class="why-item-text">
               <h4 data-node-id="n170">Livraison à domicile gratuite</h4>
-              <p data-node-id="n171">Nous livrons votre véhicule à l'adresse de votre choix dans un rayon de 30 km.</p>
+              <p data-node-id="n171">Dans un rayon de 30 km, sans supplément.</p>
             </div>
           </li>
           <li data-node-id="n172" class="why-item">
@@ -258,7 +268,7 @@
             </div>
             <div data-node-id="n176" class="why-item-text">
               <h4 data-node-id="n177">Annulation gratuite 24h avant</h4>
-              <p data-node-id="n178">Flexibilité totale — annulez ou modifiez votre réservation sans frais jusqu'à 24h avant.</p>
+              <p data-node-id="n178">Flexibilité totale, remboursement immédiat.</p>
             </div>
           </li>
           <li data-node-id="n179" class="why-item">
@@ -267,20 +277,25 @@
             </div>
             <div data-node-id="n183" class="why-item-text">
               <h4 data-node-id="n184">Prise en charge accident immédiate</h4>
-              <p data-node-id="n185">En cas d'incident, notre équipe intervient dans l'heure avec un véhicule de remplacement.</p>
+              <p data-node-id="n185">Intervention en moins d'une heure, véhicule de remplacement.</p>
             </div>
           </li>
       </ul>
       </div>
-      <div data-node-id="n187" class="img">
-        <img src="image/image_12.jpg" alt="image_12" class="ref-img" data-node-id="n189">
+      <div data-node-id="n187" class="why-img">
+        <img src="image/why.jpg" alt="image_12" class="ref-img" data-node-id="n189">
+        <div class="floating-card">
+          <div class="floating-stars">★★★★★</div>
+          <strong>4.9 / 5</strong>
+          <span>sur 12 000 avis clients</span>
+        </div>
       </div>
      </section>
 
     <!-- ══ TESTIMONIALS ══ -->
      <section data-node-id="n190" class="testimonials" data-component="testimonials">
       <div data-node-id="n191" class="section-temoignage">
-        <div data-node-id="n192" class="section-label">Témoignages</div>
+        <span class="eyebrow"><span class="eyebrow-dot"></span>Témoignages</span>
         <h2 data-node-id="n193" class="section-title">Ce que disent <span data-node-id="n194">nos clients</span></h2>
       </div>
       <div data-node-id="n195" class="testimonials-grid">
