@@ -960,3 +960,15 @@ html {
     padding-left: 0;
   }
 }
+@media (max-width: 1024px) and (min-width: 768px)
+{
+    .search-fields{
+        grid-template-columns: 1fr 1fr;
+    }
+    .reach-btn {
+        grid-column: 1 / -1;
+    }
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
