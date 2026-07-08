@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════════════════
    XLauto — style.css
-   Auteur  : [Ton nom]
+   Auteur  : [Mouhamed Ndiaye]
    Version : 2.0
    Sections:
      1. Variables & Reset
@@ -33,7 +33,7 @@
   --color-white:      #FFFFFF;
 
   /* Typographie */
-  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
   --font-body:    'Inter', sans-serif;
 
   /* Rayons */
@@ -216,17 +216,6 @@ body {
     transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
     opacity   0.2s ease;
 }
-
-
-/* ══════════════════════════════════════════════════════════
-   3. HERO SECTION
-   Problème résolu : l'image de fond appartient à .hero-section
-   qui enveloppe header + hero + search-widget.
-   La hauteur s'adapte grâce à min-height: 100dvh sur .hero
-   combiné à height: auto. Sur mobile on utilise dvh (dynamic
-   viewport height) qui exclut la barre d'adresse du navigateur,
-   ce qui corrige le bug de débordement sur iOS/Android.
-══════════════════════════════════════════════════════════ */
 .hero-section {
   /* Image de fond sur toute la section (header inclus) */
   background-image:
@@ -341,11 +330,12 @@ body {
   align-items: center;
   gap: 8px;
   backdrop-filter: blur(4px);
-  transition: transform 0.25s ease, background 0.2s ease;
+  transition: transform 0.25s ease,  box-shadow 0.25s ease, background 0.2s ease;
 }
 .btn-secondary:hover {
   transform: translateY(-2px);
   background: rgba(255,255,255,0.22);
+  box-shadow:0 8px 24px rgba(196, 192, 187, 0.45);
 }
 
 
@@ -380,7 +370,7 @@ body {
   font-family: var(--font-body);
   transition: color 0.2s ease;
 }
-.tab-btn.active {
+.tab-btn.active{
   color: var(--color-primary);
   border-bottom-color: var(--color-primary);
 }
@@ -553,7 +543,7 @@ body {
   transition: all 0.2s ease;
 }
 .filter-btn:hover { border-color: var(--color-ink); color: var(--color-ink); }
-.filter-btn.active {
+.filter-btn:focus{
   background: var(--color-ink);
   color: #fff;
   border-color: var(--color-ink);
@@ -771,6 +761,12 @@ body {
   border: 1px solid var(--color-border);
   box-shadow: 0 4px 16px rgba(0,0,0,0.04);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.testimonial-card.three{
+  background-color:#0a0a0a;
+}
+.testimonial-card.three .testimonial-text{
+  color: var(--color-white);
 }
 .testimonial-card:hover {
   transform: translateY(-4px);
@@ -1065,7 +1061,7 @@ body {
     /* dvh = dynamic viewport height : corrige le bug iOS/Android
        où 100vh inclut la barre d'adresse et déborde de l'écran */
     min-height: 100dvh;
-    padding-top: 80px;
+    padding-top: 10rem;
     padding-bottom: 48px;
     align-items: flex-start;
   }
@@ -1118,6 +1114,9 @@ body {
     padding: clamp(28px, 5vw, 48px) 20px;
   }
   .why-img { max-width: 100%; aspect-ratio: 16/9; }
+.ref-img{
+  min-height: 100px;
+}
 
   /* --- Testimonials --- */
   .testimonials-grid { grid-template-columns: 1fr; }
