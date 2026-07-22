@@ -150,7 +150,7 @@ body {
   background: var(--color-primary);
   transition: width 0.3s ease;
 }
-.nav a:hover::after,
+.nav a:focus::after,
 .nav a.active::after { width: 100%; }
 
 /* Actions header (icônes + bouton) */

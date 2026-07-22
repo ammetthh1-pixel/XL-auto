@@ -1,0 +1,450 @@
+<!--
+  ============================================================================
+  XLauto — Page d'accueil premium (version de référence)
+  ============================================================================
+  Ce fichier est un HTML statique autonome, sans framework.
+  Tu peux :
+    • L'ouvrir directement dans ton navigateur (double-clic sur index.html)
+    • Le télécharger et l'utiliser comme référence pour améliorer ton projet
+  Toutes les sections sont annotées pour t'aider à comprendre la structure.
+  ============================================================================
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XLauto — Location & achat de véhicules premium</title>
+  <meta name="description" content="XLauto : la nouvelle référence de la location et de l'achat de voitures. Flotte premium, tarifs transparents, livraison à domicile." />
+
+  <!-- Polices Google : une pour les titres (élégante), une pour le texte (lisible) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Feuille de style principale (voir style.css pour tous les commentaires) -->
+  <link rel="stylesheet" href="style (1).css" />
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       HEADER — barre de navigation fixée en haut de page
+       ══════════════════════════════════════════════════════════════════════ -->
+  <header class="header" id="header">
+    <a href="#" class="logo">
+      <!-- Petit "point" orange pour donner une identité visuelle à la marque -->
+      <span class="logo-dot"></span>XLauto
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#" class="active">Accueil</a>
+      <a href="#vehicules">Nos véhicules</a>
+      <a href="#">Acheter</a>
+      <a href="#">Louer</a>
+      <a href="#">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn-ghost" aria-label="Mon compte">Connexion</button>
+      <a href="#" class="btn-primary btn-sm">
+        Réserver
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         HERO — grande section d'accueil avec image de fond + titre
+         ════════════════════════════════════════════════════════════════════ -->
+    <section class="hero">
+      <!-- Image de fond en overlay pour laisser le texte lisible -->
+      <div class="hero-bg" style="background-image: url('img/hero.jpg');"></div>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-inner">
+        <span class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          Votre partenaire automobile depuis 2010
+        </span>
+
+        <!-- Titre principal : un <h1> unique par page (bon pour le SEO) -->
+        <h1 class="hero-title">
+          Roulez comme vous <em>rêviez</em>.<br />
+          Louez ou achetez, sans compromis.
+        </h1>
+
+        <p class="hero-sub">
+          Plus de 500 véhicules premium disponibles. Assurance incluse,
+          livraison gratuite et annulation flexible.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#recherche" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777z"/></svg>
+            Louer un véhicule
+          </a>
+          <a href="#vehicules" class="btn-outline">
+            Voir la flotte
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <!-- Petites statistiques qui rassurent le visiteur -->
+        <div class="hero-stats">
+          <div><strong>500+</strong><span>Véhicules</span></div>
+          <div><strong>12k+</strong><span>Clients satisfaits</span></div>
+          <div><strong>4.9/5</strong><span>Note moyenne</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         WIDGET DE RECHERCHE — chevauche le bas du hero
+         ════════════════════════════════════════════════════════════════════ -->
+    <section class="search" id="recherche" aria-label="Rechercher un véhicule">
+      <div class="search-card">
+        <div class="search-tabs" role="tablist">
+          <button class="tab active" role="tab">Courte durée</button>
+          <button class="tab" role="tab">Longue durée</button>
+          <button class="tab" role="tab">Achat</button>
+        </div>
+
+        <form class="search-form" action="#" method="get">
+          <div class="field">
+            <label for="lieu">Lieu de départ</label>
+            <input id="lieu" type="text" placeholder="Dakar, Aéroport AIBD..." />
+          </div>
+          <div class="field">
+            <label for="depart">Date de départ</label>
+            <input id="depart" type="date" />
+          </div>
+          <div class="field">
+            <label for="retour">Date de retour</label>
+            <input id="retour" type="date" />
+          </div>
+          <button type="submit" class="btn-primary btn-search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            Rechercher
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         FEATURES — 4 arguments clés (grille 4 colonnes -> 2 -> 1)
+         ════════════════════════════════════════════════════════════════════ -->
+    <section class="features container">
+      <div class="feature">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-4"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h3>Véhicules récents</h3>
+        <p>Flotte renouvelée régulièrement avec les derniers modèles du marché.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Meilleurs tarifs</h3>
+        <p>Prix transparents, sans frais cachés. Garantie du prix le plus bas.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <h3>Support 24/7</h3>
+        <p>Une équipe disponible à toute heure, avant, pendant et après votre trajet.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3>Réservation simple</h3>
+        <p>3 étapes, confirmation immédiate par e-mail et SMS.</p>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         VEHICULES — cartes produit avec image, spécifications et prix
+         ════════════════════════════════════════════════════════════════════ -->
+    <section class="vehicules container" id="vehicules">
+      <header class="section-header">
+        <span class="eyebrow"><span class="eyebrow-dot"></span>Notre sélection</span>
+        <h2>Découvrez <em>nos véhicules</em></h2>
+        <p>Location ou achat : trouvez la voiture qui vous ressemble.</p>
+      </header>
+
+      <!-- Filtres (démo statique — pour une vraie version il faudrait du JS) -->
+      <div class="filters">
+        <button class="chip active">Tous</button>
+        <button class="chip">Citadine</button>
+        <button class="chip">SUV / 4x4</button>
+        <button class="chip">Berline</button>
+        <button class="chip">Luxe</button>
+      </div>
+
+      <div class="cars">
+
+        <!-- Carte véhicule 1 -->
+        <article class="car-card">
+          <div class="car-image" style="background: linear-gradient(180deg, #f5f0e6 0%, #e8dfd0 100%);">
+            <span class="car-badge">Électrique</span>
+            <img src="img/car1.png" alt="Peugeot 208" />
+          </div>
+          <div class="car-body">
+            <div class="car-meta">Citadine · 2026</div>
+            <h3 class="car-name">Peugeot 208</h3>
+            <div class="car-specs">
+              <span>⚙ Auto</span><span>👤 5 places</span><span>⚡ Électrique</span>
+            </div>
+            <div class="car-footer">
+              <div class="car-price">70 000<span> FCFA/j</span></div>
+              <button class="btn-primary btn-sm">Réserver</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Carte véhicule 2 -->
+        <article class="car-card">
+          <div class="car-image" style="background: linear-gradient(180deg, #eef2f7 0%, #dfe6ef 100%);">
+            <span class="car-badge">Populaire</span>
+            <img src="img/car2.png" alt="BMW X5" />
+          </div>
+          <div class="car-body">
+            <div class="car-meta">SUV · 2026</div>
+            <h3 class="car-name">BMW X5</h3>
+            <div class="car-specs">
+              <span>⛽ Diesel</span><span>👤 5 places</span><span>⚙ Auto</span>
+            </div>
+            <div class="car-footer">
+              <div class="car-price">1 000 000<span> FCFA</span></div>
+              <button class="btn-primary btn-sm">Détails</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Carte véhicule 3 -->
+        <article class="car-card">
+          <div class="car-image" style="background: linear-gradient(180deg, #1a1a1a 0%, #2a2a2a 100%);">
+            <span class="car-badge car-badge-dark">Luxe</span>
+            <img src="img/car3.png" alt="Mercedes Classe E" />
+          </div>
+          <div class="car-body">
+            <div class="car-meta">Berline · 2026</div>
+            <h3 class="car-name">Mercedes Classe E</h3>
+            <div class="car-specs">
+              <span>⛽ Hybride</span><span>👤 5 places</span><span>⚙ Auto</span>
+            </div>
+            <div class="car-footer">
+              <div class="car-price">120 000<span> FCFA/j</span></div>
+              <button class="btn-primary btn-sm">Réserver</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         WHY US — deux colonnes : texte + image
+         ════════════════════════════════════════════════════════════════════ -->
+    <section class="why container">
+      <div class="why-text">
+        <span class="eyebrow"><span class="eyebrow-dot"></span>Pourquoi nous choisir</span>
+        <h2>L'excellence <em>automobile</em><br />à votre service.</h2>
+        <p class="lead">
+          Depuis 2010, XLauto accompagne des milliers de conducteurs
+          avec un service premium, transparent et humain.
+        </p>
+
+        <ul class="why-list">
+          <li>
+            <span class="check">✓</span>
+            <div>
+              <h4>Assurance tous risques incluse</h4>
+              <p>Chaque location est couverte sans franchise cachée.</p>
+            </div>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <div>
+              <h4>Livraison gratuite à domicile</h4>
+              <p>Dans un rayon de 30 km, sans supplément.</p>
+            </div>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <div>
+              <h4>Annulation gratuite 24h avant</h4>
+              <p>Flexibilité totale, remboursement immédiat.</p>
+            </div>
+          </li>
+          <li>
+            <span class="check">✓</span>
+            <div>
+              <h4>Assistance accident immédiate</h4>
+              <p>Intervention en moins d'une heure, véhicule de remplacement.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="why-image">
+        <img src="img/why.jpg" alt="Remise des clés à un client" loading="lazy" />
+        <!-- Petite carte flottante pour ajouter un effet "premium" -->
+        <div class="floating-card">
+          <div class="floating-stars">★★★★★</div>
+          <strong>4.9 / 5</strong>
+          <span>sur 12 000 avis clients</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         TESTIMONIALS — 3 avis clients
+         ════════════════════════════════════════════════════════════════════ -->
+    <section class="testimonials container">
+      <header class="section-header">
+        <span class="eyebrow"><span class="eyebrow-dot"></span>Témoignages</span>
+        <h2>Ce que disent <em>nos clients</em></h2>
+      </header>
+
+      <div class="testimonials-grid">
+        <figure class="testimonial">
+          <div class="stars">★★★★★</div>
+          <blockquote>
+            « Réservation ultra fluide, la voiture était impeccable
+            et livrée à l'heure. Je recommande à 100%. »
+          </blockquote>
+          <figcaption>
+            <span class="avatar" style="background:#F7941D">MN</span>
+            <span><strong>Mouhamed Ndiaye</strong><em>Dakar</em></span>
+          </figcaption>
+        </figure>
+
+        <figure class="testimonial featured">
+          <div class="stars">★★★★★</div>
+          <blockquote>
+            « Une BMW X5 neuve à un prix imbattable. Le service
+            client est réactif, à l'écoute. Vraiment top. »
+          </blockquote>
+          <figcaption>
+            <span class="avatar" style="background:#1a1a1a">TD</span>
+            <span><strong>Thomas Dubois</strong><em>Lyon</em></span>
+          </figcaption>
+        </figure>
+
+        <figure class="testimonial">
+          <div class="stars">★★★★<span class="star-off">★</span></div>
+          <blockquote>
+            « Belle sélection, processus d'achat simplifié.
+            Reparti avec ma voiture en 2 jours. »
+          </blockquote>
+          <figcaption>
+            <span class="avatar" style="background:#2c5f8a">SC</span>
+            <span><strong>Sophie Chen</strong><em>Bordeaux</em></span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════════
+         CTA final — grand bandeau pour inciter à l'action
+         ════════════════════════════════════════════════════════════════════ -->
+    <section class="cta-band container">
+      <div class="cta-inner">
+        <h2>Prêt à prendre la route ?</h2>
+        <p>Réservez en 2 minutes, sans engagement.</p>
+        <a href="#recherche" class="btn-primary btn-lg">
+          Trouver mon véhicule
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       FOOTER — 4 colonnes + barre légale en bas
+       ══════════════════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-dot"></span>XLauto</div>
+        <p>Votre partenaire de confiance pour la location et l'achat de véhicules premium.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#">Accueil</a></li>
+          <li><a href="#">Nos véhicules</a></li>
+          <li><a href="#">Acheter</a></li>
+          <li><a href="#">Louer</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Location courte durée</a></li>
+          <li><a href="#">Location longue durée</a></li>
+          <li><a href="#">Achat de véhicule</a></li>
+          <li><a href="#">Assistance routière</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>+221 33 000 00 00</li>
+          <li>contact@xlauto.sn</li>
+          <li>12 Avenue de la République, Dakar</li>
+          <li>Lun–Sam : 8h – 20h</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 XLauto. Tous droits réservés.</span>
+      <div>
+        <a href="#">Mentions légales</a>
+        <a href="#">Confidentialité</a>
+        <a href="#">CGU</a>
+      </div>
+    </div>
+  </footer>
+
+  <!--
+    Petit script vanilla JS pour :
+      - Ajouter une ombre au header quand on scrolle
+      - Gérer la sélection des filtres et onglets (démo)
+  -->
+  <script>
+    // Header : ajoute la classe "scrolled" quand on descend
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Filtres et onglets : effet actif au clic (démo pure UI)
+    document.querySelectorAll('.filters').forEach(group => {
+      group.addEventListener('click', e => {
+        if (e.target.classList.contains('chip')) {
+          group.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+          e.target.classList.add('active');
+        }
+      });
+    });
+    document.querySelectorAll('.search-tabs').forEach(group => {
+      group.addEventListener('click', e => {
+        if (e.target.classList.contains('tab')) {
+          group.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          e.target.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

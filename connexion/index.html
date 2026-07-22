@@ -9,50 +9,187 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body style="background-color: #F9F9F9;;">
+<body>
 
   <!-- ══ HERO SECTION (fond image) ══ -->
   <section class="hero-section">
 
     <!-- ══ HEADER ══ -->
-    <header class="header" style="background-color: #fff;">
+    <header class="header" >
       <a href="#" class="logo">
+         <!-- Checkbox hack menu mobile — sans JS -->
+        <input type="checkbox" id="menu-toggle" class="menu-toggle-input">
+        <label for="menu-toggle" class="menu-toggle" aria-label="Ouvrir le menu">
+          <span></span><span></span><span></span>
+        </label>
         <span class="logo-dot"></span> XLauto
       </a>
-      <div class="nav-panel">
         <nav class="nav">
-          <a href="../index.html" class="active">Accueil</a>
+          <a href="../index.html" >Accueil</a>
           <a href="#">Nos véhicules</a>
           <a href="#vehicules">Acheter</a>
           <a href="#vehicules">Louer</a>
-          <a href="#">Contact</a>
+          <a href="#" class="active">Contact</a>
         </nav>
-        <div class="header-actions">
-          <button class="icon-btn" aria-label="Profil utilisateur">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-          </button>
-          <button class="icon-btn parametre" aria-label="Paramètres">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="3"/>
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
-            </svg>
-          </button>
+        <div class="header-action">
+          <a href="#infos" class="btn-ghost">Connexion</a>
           <a href="#" class="btn-contact">
             Réserver
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
         </div>
-        <!-- Checkbox hack menu mobile — sans JS -->
-        <input type="checkbox" id="menu-toggle" class="menu-toggle-input">
-        <label for="menu-toggle" class="menu-toggle" aria-label="Ouvrir le menu">
-          <span></span><span></span><span></span>
-        </label>
-      </div>
+       
     </header>
+    <section class="a-propos">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>à propos</div>
+      <h1 class="tittle">Qui sommes- <span class="tittle-dot">nous?</span></h1>
+      <p class="typewriter-wrapper">
+        <span class="typewriter">Xlauto, la nouvelle référence auto.</span>
+      </p>
+      <p class="sub-tittle">Depuis 2010, <strong>XLauto</strong>  réinvente la mobilité en Afrique de l'Ouest. Notre mission : rendre l'accès à un véhicule premium simple, transparent et humain — que ce soit pour une location d'un jour ou pour l'achat de la voiture de tes rêves. Une flotte renouvelée en permanence, une équipe passionnée et un service client disponible 7j/7 : c'est ça, l'esprit XLauto.</p>
+    </section>
+    <section class="infos" id="infos">
+      <article class="connexion">
+        <div class="descript">
+          <div class="eyebrow"><span class="eyebrow-dot"></span>connexion</div>
+          <h2 class="mini-tittle">Accède à ton <span class="tittle-dot">espace</span></h2>
+          <p class="sub-tittle mini">Retrouve tes réservations, factures et véhicules favoris.</p>
+        </div>
+        <form action="#" class="infos-connexion">
+          <div class="group">
+          <label for="email" class="label">Adresse e-mail</label>
+          <input type="text" id="email" class="input"  name="email" placeholder="ammetthh1@gmail.com">
+          </div>
+          <div class="group">
+          <label for="password" class="label">Mot de passe</label>
+          <input type="text" id="password" class="input" name="mot-de-pass" placeholder="••••••••">
+          </div>
+          <div class="pass">
+              <label class="checkbox"> <input type="checkbox">
+                Se souvenir de moi</label>
+            <a href="#" class="tittle-dot" style="text-decoration: none;">Mot de passe oublié ?</a>
+          </div>
+          <button type="submit" class="submit">Se connecter</button>
+          <a href="#" style="text-decoration: none;" class="ask">Pas encore de compte ? <span class="tittle-dot" >Créer un compte</span></a>
+        </form>
+      </article>
+      <article class="info-contact">
+        <div class="eyebrow"><span class="eyebrow-dot"></span>Nous joindre</div>
+        <h2 class="mini-tittle">Une question?<span class="tittle-dot">Parlons-en.</span></h2>
+        <p class="sub-tittle">Notre équipe te répond sous 24h, du lundi au samedi.Passe aussi nous voir en agence!</p>
+        <div class="contacts">
+          <div class="contact">
+            <div class="icn-cnt">📞</div>
+            <div class="coordonne">
+              <h4>Téléphone</h4>
+              <p>+221 782812924</p>
+            </div>
+          </div>
+          <div class="contact">
+            <div class="icn-cnt">✉️</div>
+            <div class="coordonne">
+              <h4>E-mail</h4>
+              <p>contact@xlauto.sn</p>
+            </div>
+          </div>
+          <div class="contact">
+            <div class="icn-cnt">📍</div>
+            <div class="coordonne">
+              <h4>Adresse</h4>
+              <p>12 Avenue de la République, Dakar</p>
+            </div>
+          </div>
+          <div class="contact">
+            <div class="icn-cnt">🕐</div>
+            <div class="coordonne">
+              <h4>Horaires</h4>
+              <p>Lundi – Samedi : 8h – 20h
 
-    
+</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+     <!-- ══ FOOTER ══ -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo">XLauto</div>
+          <p>Votre partenaire de confiance pour la location et l'achat de véhicules au meilleur prix depuis 2026.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Twitter / X">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#">Nos véhicules</a></li>
+            <li><a href="#">Acheter</a></li>
+            <li><a href="#">Louer</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">Location courte durée</a></li>
+            <li><a href="#">Location longue durée</a></li>
+            <li><a href="#">Achat de véhicule</a></li>
+            <li><a href="#">Assistance routière</a></li>
+            <li><a href="#">Assurance incluse</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+221338001234">+221 33 800 12 34</a></li>
+            <li><a href="mailto:contact@xlauto.sn">contact@xlauto.sn</a></li>
+            <li><a href="#">Parcelles Assainies, Dakar</a></li>
+            <li><a href="#">Lun–Sam : 8h–20h</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 XLauto. Tous droits réservés.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Mentions légales</a>
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">CGU</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation mobile bas de page -->
+    <nav class="bottom-nav" aria-label="Navigation mobile">
+      <a href="#" class="nav-item active">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Accueil</span>
+      </a>
+      <a href="#" class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <span>Véhicules</span>
+      </a>
+      <a href="#" class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Recherche</span>
+      </a>
+      <a href="#" class="nav-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Profil</span>
+      </a>
+    </nav>
+  </footer>
 </body>
 </html>
